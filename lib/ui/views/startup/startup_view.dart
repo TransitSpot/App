@@ -1,12 +1,24 @@
-import 'package:transitspot/app/app.locator.dart';
-import 'package:transitspot/app/app.router.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:transitspot/ui/views/startup/startup_view.dart';
 
-class StartupViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
+class StartupView extends StatelessWidget {
+  const StartupView({Key? key}) : super(key: key);
 
-  Future initialise() async {
-    await _navigationService.navigateTo(Routes.registerView);
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<StartupViewModel>.reactive(
+      onModelReady: (viewModel) => {
+        Future.delayed(const Duration(milliseconds: 3000), () {
+          viewModel.initialise();
+        })
+      },
+      builder: (context, model, child) => const Scaffold(
+        body: Center(
+          child: Text('Start up view'),
+        ),
+      ),
+      viewModelBuilder: () => StartupViewModel(),
+    );
   }
 }
