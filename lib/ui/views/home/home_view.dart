@@ -11,7 +11,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegisterViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        backgroundColor: AppColors.bg,
+        backgroundColor: AppColors.primaryBackground,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
         body: Container(
           child: AppText(
             text: model.title,
-            color: AppColors.fontPrimary,
+            color: AppColors.content,
             size: 20,
           ),
         ),

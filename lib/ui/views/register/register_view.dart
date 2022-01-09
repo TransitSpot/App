@@ -19,7 +19,7 @@ class RegisterView extends StatelessWidget with $RegisterView {
     return ViewModelBuilder<RegisterViewModel>.reactive(
       onModelReady: (viewModel) => listenToFormUpdated(viewModel),
       builder: (context, model, child) => Scaffold(
-        backgroundColor: AppColors.bg,
+        backgroundColor: AppColors.primaryBackground,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -28,7 +28,7 @@ class RegisterView extends StatelessWidget with $RegisterView {
         body: Container(
           child: AppText(
             text: model.title,
-            color: AppColors.fontPrimary,
+            color: AppColors.content,
             size: 20,
           ),
         ),
