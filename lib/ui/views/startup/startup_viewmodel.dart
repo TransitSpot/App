@@ -8,6 +8,11 @@ class StartupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartupViewModel>.reactive(
+      onModelReady: (viewModel) => {
+        Future.delayed(const Duration(milliseconds: 3000), () {
+          viewModel.initialise();
+        })
+      },
       builder: (context, model, child) => const Scaffold(
         body: Center(
           child: Text('Start up view'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:transitspot/app/locator.dart';
-import 'package:transitspot/app/router.gr.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:transitspot/app/app.locator.dart';
+import 'app/app.router.dart';
 
 void main() {
   setupLocator();
@@ -10,11 +11,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
+    final _appRouter = StackedRouter();
 
-    return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
+    return MaterialApp(
+      title: 'TransitSpot',
+      navigatorKey: StackedService.navigatorKey,
+      onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }
