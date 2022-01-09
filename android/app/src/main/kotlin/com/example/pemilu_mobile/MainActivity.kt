@@ -1,4 +1,4 @@
-package com.example.pemilu_mobile
+package com.example.transitspot
 
 import io.flutter.embedding.android.FlutterActivity
 

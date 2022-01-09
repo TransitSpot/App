@@ -1,4 +1,4 @@
-name: pemilu_mobile
+name: transitspot 
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -36,6 +36,7 @@ dependencies:
   injectable:
   freezed_annotation:
   flutter_svg:
+  stacked_generator:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

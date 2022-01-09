@@ -452,6 +452,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   shelf:
     dependency: transitive
     description:
@@ -506,6 +513,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.7+1"
+  stacked_generator:
+    dependency: "direct main"
+    description:
+      name: stacked_generator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.6"
   stacked_services:
     dependency: "direct main"
     description:

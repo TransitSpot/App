@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pemilu_mobile/app/locator.dart';
-import 'package:pemilu_mobile/app/router.gr.dart';
+import 'package:transitspot/app/locator.dart';
+import 'package:transitspot/app/router.gr.dart';
 
 void main() {
   setupLocator();
