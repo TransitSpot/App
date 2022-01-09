@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:transitspot/ui/views/startup/startup_view.dart';
+import 'package:transitspot/ui/views/startup/startup_viewmodel.dart';
 
 class StartupView extends StatelessWidget {
   const StartupView({Key? key}) : super(key: key);
