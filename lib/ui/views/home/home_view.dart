@@ -64,10 +64,12 @@ class HomeView extends StatelessWidget {
                   ServiceCard(
                     title: model.srvs[0]['title']!,
                     iconSrv: model.srvs[0]['img']!,
+                    destination: model.srvs[0]['destination']!,
                   ),
                   ServiceCard(
                     title: model.srvs[1]['title']!,
                     iconSrv: model.srvs[1]['img']!,
+                    destination: model.srvs[1]['destination']!,
                   )
                   // Text('halo')
                 ],

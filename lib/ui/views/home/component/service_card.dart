@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:transitspot/utils/app_color.dart';
-import 'package:transitspot/app/app.locator.dart';
-import 'package:transitspot/app/app.router.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:transitspot/ui/views/home/home_viewmodel.dart';
 
 class ServiceCard extends StatelessWidget {
   final String title;
   final String iconSrv;
-  final _navigationService = locator<NavigationService>();
+  final String destination;
 
-  ServiceCard({Key? key, required this.title, required this.iconSrv})
+  ServiceCard(
+      {Key? key,
+      required this.title,
+      required this.iconSrv,
+      required this.destination})
       : super(key: key);
 
   @override
@@ -21,7 +23,8 @@ class ServiceCard extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            _navigationService.navigateTo(Routes.bookView);
+            HomeViewModel.navigatePage(destination);
+            print('click navigatePage');
           },
           child: Card(
             shape: RoundedRectangleBorder(
