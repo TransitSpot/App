@@ -7,16 +7,17 @@ class HasLoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-              'lib/assets/shared/bg_layout.png'), // must constant image path
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.bottomCenter,
+    return SizedBox(
+      height: double.infinity,
+      child: Stack(children: [
+        Positioned(
+          bottom: 0,
+          child: Image.asset(
+            'lib/assets/shared/bg_layout.png',
+          ),
         ),
-      ),
-      child: childWidget,
+        childWidget,
+      ]),
     );
   }
 }
