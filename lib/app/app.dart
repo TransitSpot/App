@@ -7,7 +7,7 @@ import 'package:transitspot/ui/views/startup/startup_view.dart';
 @StackedApp(
   routes: [
     MaterialRoute(page: StartupView, initial: true),
-    MaterialRoute(page: RegisterView),
+    CustomRoute(page: RegisterView),
     MaterialRoute(page: HomeView),
   ],
   dependencies: [

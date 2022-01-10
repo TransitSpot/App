@@ -66,6 +66,7 @@ flutter:
     - lib/assets/home/
     - lib/assets/shared/
     - lib/assets/svg/
+    - lib/assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
