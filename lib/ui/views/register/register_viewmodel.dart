@@ -7,7 +7,14 @@ import 'package:transitspot/ui/views/register/register_view.form.dart';
 class RegisterViewModel extends FormViewModel {
   final String _title = 'Register View';
   String get title => _title;
+  bool _isSignUp = true;
+  bool get isSignUp => _isSignUp;
   final _navigationService = locator<NavigationService>();
+
+  void setIsSignUp(bool state) {
+    _isSignUp = state;
+    notifyListeners();
+  }
 
   @override
   void setFormStatus() {
