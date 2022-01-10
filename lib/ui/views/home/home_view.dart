@@ -14,7 +14,23 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         backgroundColor: AppColors.primaryBackground,
-        drawer: Drawer(),
+        drawer: const Drawer(),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+            height: 40.0,
+            width: 40.0,
+            child: FittedBox(
+              child: FloatingActionButton(
+                onPressed: () {},
+                child:
+                    const Icon(Icons.settings, color: Colors.black, size: 35.0),
+                backgroundColor: AppColors.primaryBackground,
+              ),
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
         body: HasLoginView(
           childWidget: SafeArea(
             child: Padding(
