@@ -64,7 +64,7 @@ class StackedRouter extends RouterBase {
     },
     BookView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const BookView(),
+        builder: (context) => BookView(),
         settings: data,
       );
     },
