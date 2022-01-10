@@ -12,6 +12,12 @@ import 'package:stacked/stacked.dart';
 const String NameValueKey = 'name';
 const String EmailValueKey = 'email';
 const String PasswordValueKey = 'password';
+const String RegisterAsValueKey = 'registerAs';
+
+const Map<String, String> RegisterAsValueToTitleMap = {
+  'driver': 'Driver',
+  'customer': 'Customer',
+};
 
 mixin $RegisterView on StatelessWidget {
   final TextEditingController nameController = TextEditingController();
@@ -56,10 +62,16 @@ extension ValueProperties on FormViewModel {
   String? get nameValue => this.formValueMap[NameValueKey];
   String? get emailValue => this.formValueMap[EmailValueKey];
   String? get passwordValue => this.formValueMap[PasswordValueKey];
+  String? get registerAsValue => this.formValueMap[RegisterAsValueKey];
 
   bool get hasName => this.formValueMap.containsKey(NameValueKey);
   bool get hasEmail => this.formValueMap.containsKey(EmailValueKey);
   bool get hasPassword => this.formValueMap.containsKey(PasswordValueKey);
+  bool get hasRegisterAs => this.formValueMap.containsKey(RegisterAsValueKey);
 }
 
-extension Methods on FormViewModel {}
+extension Methods on FormViewModel {
+  void setRegisterAs(String registerAs) {
+    this.setData(this.formValueMap..addAll({RegisterAsValueKey: registerAs}));
+  }
+}

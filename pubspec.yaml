@@ -68,6 +68,7 @@ flutter:
     - lib/assets/svg/square.svg
     - lib/assets/svg/circle.svg
     - lib/assets/svg/triangle.svg
+    - lib/assets/images/hero-register.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
