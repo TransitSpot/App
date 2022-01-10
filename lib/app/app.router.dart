@@ -12,7 +12,7 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../ui/views/home/home_view.dart';
 import '../ui/views/register/register_view.dart';
-import '../ui/views/startup/startup_viewmodel.dart';
+import '../ui/views/startup/startup_view.dart';
 
 class Routes {
   static const String startupView = '/';
@@ -44,7 +44,7 @@ class StackedRouter extends RouterBase {
     },
     RegisterView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const RegisterView(),
+        builder: (context) => RegisterView(),
         settings: data,
       );
     },
