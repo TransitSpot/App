@@ -11,6 +11,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _appRouter = StackedRouter();
+
     return MaterialApp(
       title: 'TransitSpot',
       navigatorKey: StackedService.navigatorKey,
