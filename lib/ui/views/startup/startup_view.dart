@@ -14,10 +14,12 @@ class StartupView extends StatelessWidget {
           viewModel.initialise();
         })
       },
-      builder: (context, model, child) => const Scaffold(
-        backgroundColor: Color(0xff4CE5B1),
+      builder: (context, model, child) => Scaffold(
+        backgroundColor: AppColors.secondaryBackground,
         body: Center(
-          child: Text('Start up view'),
+          child: Image.asset(
+            'lib/assets/shared/logo.png',
+          ),
         ),
       ),
       viewModelBuilder: () => StartupViewModel(),
