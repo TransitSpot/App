@@ -42,7 +42,7 @@ class RegisterView extends StatelessWidget with $RegisterView {
             ),
             Column(
               children: [
-                Image.asset('lib/assets/images/hero-register.png'),
+                Image.asset('lib/assets/register/hero-image.png'),
                 const SizedBox(height: 20),
                 Material(
                   elevation: 5,

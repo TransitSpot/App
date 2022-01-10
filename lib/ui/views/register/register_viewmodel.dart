@@ -16,6 +16,8 @@ class RegisterViewModel extends FormViewModel {
     notifyListeners();
   }
 
+  void submit() {}
+
   @override
   void setFormStatus() {
     // TODO: implement setFormStatus

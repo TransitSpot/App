@@ -65,6 +65,7 @@ flutter:
   assets:
     - lib/assets/home/
     - lib/assets/shared/
+    - lib/assets/register/
     - lib/assets/svg/
     # - lib/assets/images/
 
