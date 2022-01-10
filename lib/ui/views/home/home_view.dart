@@ -61,17 +61,15 @@ class HomeView extends StatelessWidget {
                       fontSize: 24,
                     ),
                   ),
-                  ServiceCard(
-                    title: model.srvs[0]['title']!,
-                    iconSrv: model.srvs[0]['img']!,
-                    destination: model.srvs[0]['destination']!,
+                  Column(
+                    children: model.srvs.map((srv) {
+                      return ServiceCard(
+                        title: srv['title']!,
+                        iconSrv: srv['img']!,
+                        destination: srv['destination']!,
+                      );
+                    }).toList(),
                   ),
-                  ServiceCard(
-                    title: model.srvs[1]['title']!,
-                    iconSrv: model.srvs[1]['img']!,
-                    destination: model.srvs[1]['destination']!,
-                  )
-                  // Text('halo')
                 ],
               ),
             ),
