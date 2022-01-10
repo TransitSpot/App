@@ -50,9 +50,8 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<RegisterViewArguments>(
         orElse: () => RegisterViewArguments(),
       );
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            RegisterView(key: args.key),
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => RegisterView(key: args.key),
         settings: data,
       );
     },
