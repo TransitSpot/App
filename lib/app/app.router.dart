@@ -19,7 +19,7 @@ class Routes {
   static const String startupView = '/';
   static const String registerView = '/register-view';
   static const String homeView = '/home-view';
-  static const String bookView = '/book';
+  static const String bookView = '/book-view';
   static const all = <String>{
     startupView,
     registerView,
