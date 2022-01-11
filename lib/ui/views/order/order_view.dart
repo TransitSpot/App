@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:transitspot/ui/views/order/order_viewmodel.dart';
 import 'package:transitspot/ui/views/order/order_view.form.dart';
 import 'package:transitspot/datamodels/search_result_data/search_result_data.dart';
 import 'package:transitspot/utils/app_color.dart';
 import 'package:transitspot/ui/layout/has_login_view.dart';
-import 'package:transitspot/utils/text_input.dart';
 import 'package:transitspot/app/app.router.dart';
 import 'package:transitspot/ui/views/search_result/components/card_result.dart';
 
@@ -230,29 +228,27 @@ class OrderView extends StatelessWidget with $OrderView {
                                           vertical: 16.0,
                                         ),
                                         child: ElevatedButton(
-                                            onPressed: () {
-                                              print("book");
-                                              print(data);
-                                              print(model.amountBook);
-                                              print(model.paymentMethodValue);
-                                            },
-                                            child: Text('Book Now',
-                                                style: TextStyle(
-                                                    color: AppColors
-                                                        .primaryBackground,
-                                                    fontSize: 17.0,
-                                                    fontWeight:
-                                                        FontWeight.w700)),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(
-                                                AppColors
-                                                    .darkSecondaryBackground,
-                                              ),
-                                              elevation: MaterialStateProperty
-                                                  .all<double>(4.0),
-                                            )),
+                                          onPressed: () {
+                                            // print("book");
+                                            // print(data);
+                                            // print(model.amountBook);
+                                            // print(model.paymentMethodValue);
+                                            model.book();
+                                          },
+                                          child: Text('Book Now',
+                                              style: TextStyle(
+                                                  color: AppColors
+                                                      .primaryBackground,
+                                                  fontSize: 17.0,
+                                                  fontWeight: FontWeight.w700)),
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty
+                                                .all<Color>(AppColors
+                                                    .darkSecondaryBackground),
+                                            elevation: MaterialStateProperty
+                                                .all<double>(4.0),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
