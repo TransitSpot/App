@@ -18,7 +18,7 @@ class HomeViewModel extends BaseViewModel {
     {
       'title': "Find on Demand",
       'img': 'lib/assets/home/distance.png',
-      'destination': Routes.bookView,
+      'destination': Routes.registerView,
     },
   ];
   final List<Map<String, String>> _srvDriver = [
@@ -34,6 +34,11 @@ class HomeViewModel extends BaseViewModel {
     },
   ];
 
+  Future navigatePage(String page) async {
+    final _navigationService = locator<NavigationService>();
+    await _navigationService.navigateTo(page);
+  }
+
   String get image => 'lib/assets/home/dummy-avatar.png';
   String get title1 => _title1;
   String get title2 => _title2;
@@ -41,9 +46,4 @@ class HomeViewModel extends BaseViewModel {
   String get role => _role;
   List<Map<String, String>> get srvs =>
       (_role == 'Customer') ? _srvCustomer : _srvDriver;
-
-  static Future navigatePage(String page) async {
-    final _navigationService = locator<NavigationService>();
-    await _navigationService.navigateTo(page);
-  }
 }
