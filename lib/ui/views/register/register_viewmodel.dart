@@ -2,7 +2,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:transitspot/app/app.locator.dart';
 import 'package:transitspot/app/app.router.dart';
-import 'package:transitspot/datamodels/user/user.dart';
 import 'package:transitspot/ui/views/register/register_view.form.dart';
 import 'package:transitspot/services/authentication_service.dart';
 
@@ -22,22 +21,24 @@ class RegisterViewModel extends FormViewModel {
   }
 
   void submit() async {
-    if (emailValue != null &&
-        passwordValue != null &&
-        nameValue != null &&
-        registerAsValue != null) {
-      if (isSignUp) {
+    if (isSignUp) {
+      if (emailValue != null &&
+          passwordValue != null &&
+          nameValue != null &&
+          registerAsValue != null) {
         await _authService.signUpWithEmail(
             email: emailValue!,
             password: passwordValue!,
             fullName: nameValue!,
             isDriver: registerAsValue == "driver");
-      } else {
+      }
+    } else {
+      if (emailValue != null && passwordValue != null) {
         await _authService.loginWithEmail(
             email: emailValue!, password: passwordValue!);
       }
-      await _navigationService.navigateTo(Routes.homeView);
     }
+    await _navigationService.navigateTo(Routes.homeView);
   }
 
   @override

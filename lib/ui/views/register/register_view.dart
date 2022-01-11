@@ -35,112 +35,125 @@ class RegisterView extends StatelessWidget with $RegisterView {
       builder: (context, model, child) => Scaffold(
         backgroundColor: AppColors.primaryBackground,
         body: SingleChildScrollView(
-          child: Stack(children: [
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
-              width: double.maxFinite,
-              color: AppColors.secondaryBackground,
-            ),
-            Column(
-              children: [
-                Image.asset('lib/assets/register/hero-image.png'),
-                const SizedBox(height: 20),
-                Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.primaryBackground,
-                  child: Container(
-                    margin: const EdgeInsets.all(5),
-                    width: MediaQuery.of(context).size.width / 10 * 8,
-                    child: Column(
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: double.maxFinite,
+                color: AppColors.secondaryBackground,
+              ),
+              model.isBusy
+                  ? Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: double.maxFinite,
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  model.setIsSignUp(true);
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                        Image.asset('lib/assets/register/hero-image.png'),
+                        const SizedBox(height: 20),
+                        Material(
+                          elevation: 5,
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.primaryBackground,
+                          child: Container(
+                            margin: const EdgeInsets.all(5),
+                            width: MediaQuery.of(context).size.width / 10 * 8,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    AppText(
-                                      color: Colors.black,
-                                      text: "Sign Up",
-                                      size: 22.5,
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          model.setIsSignUp(true);
+                                        },
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            AppText(
+                                              color: Colors.black,
+                                              text: "Sign Up",
+                                              size: 22.5,
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Container(
+                                              height: 5,
+                                              color: model.isSignUp
+                                                  ? AppColors
+                                                      .secondaryBackground
+                                                  : Colors.transparent,
+                                              width: 30,
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    GestureDetector(
+                                      onTap: () {
+                                        model.setIsSignUp(false);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            AppText(
+                                              color: Colors.black,
+                                              text: "Sign In",
+                                              size: 22.5,
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Container(
+                                              height: 5,
+                                              color: !model.isSignUp
+                                                  ? AppColors
+                                                      .secondaryBackground
+                                                  : Colors.transparent,
+                                              width: 30,
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    Container(
-                                      height: 5,
-                                      color: model.isSignUp
-                                          ? AppColors.secondaryBackground
-                                          : Colors.transparent,
-                                      width: 30,
-                                    )
                                   ],
                                 ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                model.setIsSignUp(false);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    AppText(
-                                      color: Colors.black,
-                                      text: "Sign In",
-                                      size: 22.5,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      height: 5,
-                                      color: !model.isSignUp
-                                          ? AppColors.secondaryBackground
-                                          : Colors.transparent,
-                                      width: 30,
-                                    )
-                                  ],
+                                const Divider(),
+                                Container(
+                                  child: model.isSignUp
+                                      ? SignUpForm(model)
+                                      : SignInForm(model),
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      model.submit();
+                                    },
+                                    elevation: 5,
+                                    padding: EdgeInsets.all(20),
+                                    child: Text("Submit"),
+                                    color: AppColors.secondaryBackground,
+                                    minWidth: double.infinity,
+                                  ),
+                                )
+                              ],
                             ),
-                          ],
-                        ),
-                        const Divider(),
-                        Container(
-                          child: model.isSignUp
-                              ? SignUpForm(model)
-                              : SignInForm(model),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: MaterialButton(
-                            onPressed: () {
-                              model.submit();
-                            },
-                            elevation: 5,
-                            padding: EdgeInsets.all(20),
-                            child: Text("Submit"),
-                            color: AppColors.secondaryBackground,
-                            minWidth: double.infinity,
                           ),
                         )
                       ],
-                    ),
-                  ),
-                )
-              ],
-            )
-          ]),
+                    )
+            ],
+          ),
         ),
       ),
       viewModelBuilder: () => RegisterViewModel(),

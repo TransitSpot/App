@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:transitspot/utils/app_color.dart';
 
 class UserCard extends StatelessWidget {
-  final String img = 'lib/assets/home/dummy-avatar.png';
+  final String img;
   final String uname;
   final String role;
 
-  const UserCard({Key? key, required this.uname, required this.role})
+  const UserCard(
+      {Key? key, required this.uname, required this.role, required this.img})
       : super(key: key);
 
   @override
@@ -29,7 +30,7 @@ class UserCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage(img),
+              backgroundImage: NetworkImage(img),
               radius: 30.0,
             ),
             title: Text(

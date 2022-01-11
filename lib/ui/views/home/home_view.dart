@@ -12,6 +12,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
+      onModelReady: (model) => {model.getUserData()},
       builder: (context, model, child) => Scaffold(
         backgroundColor: AppColors.primaryBackground,
         drawer: const Drawer(),
@@ -22,7 +23,9 @@ class HomeView extends StatelessWidget {
             width: 40.0,
             child: FittedBox(
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  model.logout();
+                },
                 child:
                     const Icon(Icons.settings, color: Colors.black, size: 35.0),
                 backgroundColor: AppColors.primaryBackground,
@@ -50,6 +53,7 @@ class HomeView extends StatelessWidget {
                   UserCard(
                     uname: model.uname,
                     role: model.role,
+                    img: model.photoURL,
                     // TODO: add image
                   ),
                   const SizedBox(height: 20),

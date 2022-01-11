@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:transitspot/app/app.locator.dart';
+import 'package:transitspot/app/app.router.dart';
 import 'package:transitspot/datamodels/user/user.dart' as UserApp;
 import 'package:transitspot/services/user_service.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
 
   Future loginWithEmail({
@@ -18,7 +21,7 @@ class AuthenticationService {
       );
       return authResult.user != null;
     } catch (e) {
-      return e.toString();
+      rethrow;
     }
   }
 
@@ -34,19 +37,19 @@ class AuthenticationService {
         password: password,
       );
 
+      var nameToUri = Uri.encodeComponent(fullName);
       var user = UserApp.User(
         email: email,
         name: fullName,
-        photoUrl: "https://avatars.dicebear.com/api/personas/$fullName.svg",
+        photoUrl: "https://avatars.dicebear.com/api/personas/$nameToUri.png",
         isDriver: isDriver,
       );
 
-      await _userService.addUser(user);
+      await _userService.addUser(authResult.user!.uid, user);
 
       return authResult.user != null;
     } catch (e) {
-      print(e.toString());
-      return e.toString();
+      rethrow;
     }
   }
 
@@ -56,6 +59,7 @@ class AuthenticationService {
 
   Future<void> logOut() async {
     await _firebaseAuth.signOut();
+    await _navigationService.navigateTo(Routes.registerView);
   }
 
   User? getCurrentUser() {
