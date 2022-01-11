@@ -10,6 +10,9 @@ class SearchResultData with _$SearchResultData {
     required String date,
     required String time,
     required String price,
+    required String id,
+    required String name,
+    required int avail,
   }) = _SearchResultData;
 
   factory SearchResultData.fromJson(Map<String, dynamic> json) =>

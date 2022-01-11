@@ -61,7 +61,11 @@ class SearchResultView extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
                             child: Column(
                               children: snapshot.data!.map((datum) {
-                                return CardResult(data: datum);
+                                return CardResult(
+                                  data: datum,
+                                  hasButton: true,
+                                  book: model.book,
+                                );
                               }).toList(),
                             ),
                           );

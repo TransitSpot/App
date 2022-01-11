@@ -26,13 +26,19 @@ class _$SearchResultDataTearOff {
       required String destination,
       required String date,
       required String time,
-      required String price}) {
+      required String price,
+      required String id,
+      required String name,
+      required int avail}) {
     return _SearchResultData(
       start: start,
       destination: destination,
       date: date,
       time: time,
       price: price,
+      id: id,
+      name: name,
+      avail: avail,
     );
   }
 
@@ -51,6 +57,9 @@ mixin _$SearchResultData {
   String get date => throw _privateConstructorUsedError;
   String get time => throw _privateConstructorUsedError;
   String get price => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  int get avail => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,7 +77,10 @@ abstract class $SearchResultDataCopyWith<$Res> {
       String destination,
       String date,
       String time,
-      String price});
+      String price,
+      String id,
+      String name,
+      int avail});
 }
 
 /// @nodoc
@@ -87,6 +99,9 @@ class _$SearchResultDataCopyWithImpl<$Res>
     Object? date = freezed,
     Object? time = freezed,
     Object? price = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? avail = freezed,
   }) {
     return _then(_value.copyWith(
       start: start == freezed
@@ -109,6 +124,18 @@ class _$SearchResultDataCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      avail: avail == freezed
+          ? _value.avail
+          : avail // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -125,7 +152,10 @@ abstract class _$SearchResultDataCopyWith<$Res>
       String destination,
       String date,
       String time,
-      String price});
+      String price,
+      String id,
+      String name,
+      int avail});
 }
 
 /// @nodoc
@@ -146,6 +176,9 @@ class __$SearchResultDataCopyWithImpl<$Res>
     Object? date = freezed,
     Object? time = freezed,
     Object? price = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? avail = freezed,
   }) {
     return _then(_SearchResultData(
       start: start == freezed
@@ -168,6 +201,18 @@ class __$SearchResultDataCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      avail: avail == freezed
+          ? _value.avail
+          : avail // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -180,7 +225,10 @@ class _$_SearchResultData implements _SearchResultData {
       required this.destination,
       required this.date,
       required this.time,
-      required this.price});
+      required this.price,
+      required this.id,
+      required this.name,
+      required this.avail});
 
   factory _$_SearchResultData.fromJson(Map<String, dynamic> json) =>
       _$$_SearchResultDataFromJson(json);
@@ -195,10 +243,16 @@ class _$_SearchResultData implements _SearchResultData {
   final String time;
   @override
   final String price;
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final int avail;
 
   @override
   String toString() {
-    return 'SearchResultData(start: $start, destination: $destination, date: $date, time: $time, price: $price)';
+    return 'SearchResultData(start: $start, destination: $destination, date: $date, time: $time, price: $price, id: $id, name: $name, avail: $avail)';
   }
 
   @override
@@ -211,7 +265,10 @@ class _$_SearchResultData implements _SearchResultData {
                 .equals(other.destination, destination) &&
             const DeepCollectionEquality().equals(other.date, date) &&
             const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.price, price));
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.avail, avail));
   }
 
   @override
@@ -221,7 +278,10 @@ class _$_SearchResultData implements _SearchResultData {
       const DeepCollectionEquality().hash(destination),
       const DeepCollectionEquality().hash(date),
       const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(price));
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(avail));
 
   @JsonKey(ignore: true)
   @override
@@ -240,7 +300,10 @@ abstract class _SearchResultData implements SearchResultData {
       required String destination,
       required String date,
       required String time,
-      required String price}) = _$_SearchResultData;
+      required String price,
+      required String id,
+      required String name,
+      required int avail}) = _$_SearchResultData;
 
   factory _SearchResultData.fromJson(Map<String, dynamic> json) =
       _$_SearchResultData.fromJson;
@@ -255,6 +318,12 @@ abstract class _SearchResultData implements SearchResultData {
   String get time;
   @override
   String get price;
+  @override
+  String get id;
+  @override
+  String get name;
+  @override
+  int get avail;
   @override
   @JsonKey(ignore: true)
   _$SearchResultDataCopyWith<_SearchResultData> get copyWith =>
