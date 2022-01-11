@@ -13,6 +13,7 @@ import 'package:stacked/stacked_annotations.dart';
 import '../ui/views/book/book_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/register/register_view.dart';
+import '../ui/views/search_result/search_result_view.dart';
 import '../ui/views/startup/startup_view.dart';
 
 class Routes {
@@ -20,11 +21,13 @@ class Routes {
   static const String registerView = '/register-view';
   static const String homeView = '/home-view';
   static const String bookView = '/book-view';
+  static const String searchResultView = '/search-result-view';
   static const all = <String>{
     startupView,
     registerView,
     homeView,
     bookView,
+    searchResultView,
   };
 }
 
@@ -36,6 +39,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.registerView, page: RegisterView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.bookView, page: BookView),
+    RouteDef(Routes.searchResultView, page: SearchResultView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -70,6 +74,17 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    SearchResultView: (data) {
+      var args = data.getArgs<SearchResultViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SearchResultView(
+          key: args.key,
+          start: args.start,
+          destination: args.destination,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -87,4 +102,13 @@ class RegisterViewArguments {
 class BookViewArguments {
   final Key? key;
   BookViewArguments({this.key});
+}
+
+/// SearchResultView arguments holder class
+class SearchResultViewArguments {
+  final Key? key;
+  final String start;
+  final String destination;
+  SearchResultViewArguments(
+      {this.key, required this.start, required this.destination});
 }
