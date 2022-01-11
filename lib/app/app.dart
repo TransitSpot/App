@@ -1,5 +1,8 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:transitspot/services/authentication_service.dart';
+import 'package:transitspot/services/firestore_service.dart';
+import 'package:transitspot/ui/views/book/book_view.dart';
 import 'package:transitspot/ui/views/home/home_view.dart';
 import 'package:transitspot/ui/views/register/register_view.dart';
 import 'package:transitspot/ui/views/startup/startup_view.dart';
@@ -9,9 +12,12 @@ import 'package:transitspot/ui/views/startup/startup_view.dart';
     MaterialRoute(page: StartupView, initial: true),
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: HomeView),
+    MaterialRoute(page: BookView),
   ],
   dependencies: [
     Singleton(classType: NavigationService),
+    Singleton(classType: FirestoreService),
+    Singleton(classType: AuthenticationService),
   ],
 )
 class App {}

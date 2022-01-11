@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../ui/views/book/book_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/register/register_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -18,10 +19,12 @@ class Routes {
   static const String startupView = '/';
   static const String registerView = '/register-view';
   static const String homeView = '/home-view';
+  static const String bookView = '/book-view';
   static const all = <String>{
     startupView,
     registerView,
     homeView,
+    bookView,
   };
 }
 
@@ -32,6 +35,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.startupView, page: StartupView),
     RouteDef(Routes.registerView, page: RegisterView),
     RouteDef(Routes.homeView, page: HomeView),
+    RouteDef(Routes.bookView, page: BookView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -57,6 +61,15 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    BookView: (data) {
+      var args = data.getArgs<BookViewArguments>(
+        orElse: () => BookViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => BookView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -68,4 +81,10 @@ class StackedRouter extends RouterBase {
 class RegisterViewArguments {
   final Key? key;
   RegisterViewArguments({this.key});
+}
+
+/// BookView arguments holder class
+class BookViewArguments {
+  final Key? key;
+  BookViewArguments({this.key});
 }
