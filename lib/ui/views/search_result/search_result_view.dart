@@ -5,6 +5,7 @@ import 'package:transitspot/ui/layout/has_login_view.dart';
 import 'package:transitspot/ui/views/search_result/components/card_result.dart';
 import 'package:transitspot/utils/app_color.dart';
 import 'package:transitspot/app/app.router.dart';
+import 'package:transitspot/datamodels/search_result_data/search_result_data.dart';
 
 class SearchResultView extends StatelessWidget {
   final String start;

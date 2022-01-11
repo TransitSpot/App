@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../datamodels/search_result_data/search_result_data.dart';
 import '../ui/views/book/book_view.dart';
 import '../ui/views/home/home_view.dart';
+import '../ui/views/order/order_view.dart';
 import '../ui/views/register/register_view.dart';
 import '../ui/views/search_result/search_result_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -22,12 +24,14 @@ class Routes {
   static const String homeView = '/home-view';
   static const String bookView = '/book-view';
   static const String searchResultView = '/search-result-view';
+  static const String orderView = '/order-view';
   static const all = <String>{
     startupView,
     registerView,
     homeView,
     bookView,
     searchResultView,
+    orderView,
   };
 }
 
@@ -40,6 +44,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.bookView, page: BookView),
     RouteDef(Routes.searchResultView, page: SearchResultView),
+    RouteDef(Routes.orderView, page: OrderView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -85,6 +90,16 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    OrderView: (data) {
+      var args = data.getArgs<OrderViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => OrderView(
+          key: args.key,
+          data: args.data,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -111,4 +126,11 @@ class SearchResultViewArguments {
   final String destination;
   SearchResultViewArguments(
       {this.key, required this.start, required this.destination});
+}
+
+/// OrderView arguments holder class
+class OrderViewArguments {
+  final Key? key;
+  final SearchResultData data;
+  OrderViewArguments({this.key, required this.data});
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transitspot/utils/app_color.dart';
-import 'package:transitspot/ui/views/search_result/search_result_viewmodel.dart';
+import 'package:transitspot/datamodels/search_result_data/search_result_data.dart';
 
 class CardResult extends StatelessWidget {
   final SearchResultData data;
