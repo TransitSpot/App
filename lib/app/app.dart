@@ -6,6 +6,8 @@ import 'package:transitspot/services/user_service.dart';
 import 'package:transitspot/ui/views/book/book_view.dart';
 import 'package:transitspot/ui/views/home/home_view.dart';
 import 'package:transitspot/ui/views/register/register_view.dart';
+import 'package:transitspot/ui/views/book/book_view.dart';
+import 'package:transitspot/ui/views/search_result/search_result_view.dart';
 import 'package:transitspot/ui/views/startup/startup_view.dart';
 
 @StackedApp(
@@ -14,6 +16,7 @@ import 'package:transitspot/ui/views/startup/startup_view.dart';
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: BookView),
+    MaterialRoute(page: SearchResultView),
   ],
   dependencies: [
     Singleton(classType: NavigationService),

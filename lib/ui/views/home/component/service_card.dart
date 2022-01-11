@@ -6,12 +6,14 @@ class ServiceCard extends StatelessWidget {
   final String title;
   final String iconSrv;
   final String destination;
+  final Future Function(String) navigator;
 
   ServiceCard(
       {Key? key,
       required this.title,
       required this.iconSrv,
-      required this.destination})
+      required this.destination,
+      required this.navigator})
       : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class ServiceCard extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            HomeViewModel.navigatePage(destination);
+            navigator(destination);
             print('click navigatePage');
           },
           child: Card(
