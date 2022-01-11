@@ -8,7 +8,7 @@ import 'package:transitspot/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:transitspot/ui/views/book/book_view.form.dart';
-import 'package:transitspot/ui/shared_components/text_input.dart';
+import 'package:transitspot/utils/text_input.dart';
 
 @FormView(fields: [
   FormTextField(name: 'tempatAwal', isPassword: false),

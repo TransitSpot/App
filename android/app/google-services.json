@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "752631738307",
+    "project_id": "transitspot-65411",
+    "storage_bucket": "transitspot-65411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752631738307:android:a38901818a05781580d776",
+        "android_client_info": {
+          "package_name": "com.example.transitspot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752631738307-i7ik30vbhgucc7552k7j3n3679l6qio0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDozS1kf-qmI7ImoVsGTCW5u1D233LWljE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752631738307-i7ik30vbhgucc7552k7j3n3679l6qio0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

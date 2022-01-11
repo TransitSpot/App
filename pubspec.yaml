@@ -37,6 +37,8 @@ dependencies:
   freezed_annotation:
   flutter_svg:
   stacked_generator:
+  firebase_auth: 
+  cloud_firestore: 
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

@@ -7,12 +7,14 @@ class TextInput extends StatelessWidget {
     required this.nameFocusNode,
     required this.nameField,
     required this.hint,
+    this.isPassword = false,
   }) : super(key: key);
 
   final TextEditingController nameController;
   final FocusNode nameFocusNode;
   final String nameField;
   final String hint;
+  final bool isPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class TextInput extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            obscureText: true,
+            obscureText: isPassword,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               hintText: hint,

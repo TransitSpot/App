@@ -5,7 +5,7 @@ import 'package:transitspot/ui/views/register/register_viewmodel.dart';
 import 'package:transitspot/utils/app_color.dart';
 import 'package:transitspot/utils/app_text.dart';
 import 'package:stacked/stacked.dart';
-import 'package:transitspot/ui/shared_components/text_input.dart';
+import 'package:transitspot/utils/text_input.dart';
 
 @FormView(fields: [
   FormTextField(name: "name", isPassword: false),
@@ -167,6 +167,7 @@ class RegisterView extends StatelessWidget with $RegisterView {
             nameFocusNode: passwordFocusNode,
             nameField: "Password",
             hint: "*********",
+            isPassword: true,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -232,6 +233,7 @@ class RegisterView extends StatelessWidget with $RegisterView {
             nameFocusNode: passwordFocusNode,
             nameField: "Password",
             hint: "*********",
+            isPassword: true,
           ),
         ],
       ),
