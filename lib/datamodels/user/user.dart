@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'user.g.dart';
 part 'user.freezed.dart';
+part 'user.g.dart';
 
 @Freezed()
 class User with _$User {

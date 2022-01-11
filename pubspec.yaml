@@ -38,6 +38,8 @@ dependencies:
   flutter_svg:
   stacked_generator:
   firebase_auth: 
+  firebase_core:
+  firebase_analytics:
   cloud_firestore: 
   cupertino_icons: ^1.0.2
 

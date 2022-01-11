@@ -41,4 +41,8 @@ class AuthenticationService {
   bool isUserLoggedIn() {
     return _firebaseAuth.currentUser == null ? true : false;
   }
+
+  User? getCurrentUser() {
+    return _firebaseAuth.currentUser;
+  }
 }
