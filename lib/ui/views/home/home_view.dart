@@ -67,6 +67,7 @@ class HomeView extends StatelessWidget {
                         title: srv['title']!,
                         iconSrv: srv['img']!,
                         destination: srv['destination']!,
+                        navigator: model.navigatePage,
                       );
                     }).toList(),
                   ),
