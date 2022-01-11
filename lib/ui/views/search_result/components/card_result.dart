@@ -4,10 +4,14 @@ import 'package:transitspot/datamodels/search_result_data/search_result_data.dar
 
 class CardResult extends StatelessWidget {
   final SearchResultData data;
+  final Future Function(SearchResultData)? book;
+  final bool hasButton;
 
   const CardResult({
     Key? key,
     required this.data,
+    required this.hasButton,
+    this.book,
   }) : super(key: key);
 
   @override
@@ -24,21 +28,37 @@ class CardResult extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12.0,
-                    horizontal: 0,
-                  ),
-                  child: ListTile(
-                    leading: const CircleAvatar(
-                      backgroundColor: Color(0xFFF46363),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                          'lib/assets/home/card-bg.png'), // must constant image path
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
                     ),
-                    title: Text(
-                      '${data.start} to ${data.destination}',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.content,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 0,
+                    ),
+                    child: ListTile(
+                      leading: const Icon(Icons.directions_bus, size: 50.0),
+                      title: Text(
+                        data.name,
+                        style: TextStyle(
+                          fontSize: 27.0,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.content,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${data.start} to ${data.destination}',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.content,
+                        ),
                       ),
                     ),
                   ),
@@ -63,10 +83,6 @@ class CardResult extends StatelessWidget {
                             {
                               'text': data.time,
                               'icon': Icons.access_time_sharp
-                            },
-                            {
-                              'text': data.price,
-                              'icon': Icons.attach_money_sharp
                             },
                           ].map((Map x) {
                             return Padding(
@@ -101,20 +117,60 @@ class CardResult extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 4,
-                        child: Center(
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  AppColors.primaryBackground),
-                              elevation: MaterialStateProperty.all<double>(4.0),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  style: TextStyle(
+                                    color: AppColors.content,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  children: [
+                                    const WidgetSpan(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 3.0,
+                                        ),
+                                        child: Icon(Icons.attach_money_sharp),
+                                      ),
+                                    ),
+                                    TextSpan(text: data.price),
+                                  ],
+                                ),
+                              ),
                             ),
-                            child: Text('Book now',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: AppColors.content,
-                                )),
-                            onPressed: () {},
-                          ),
+                            (!hasButton)
+                                ? const SizedBox(height: 20.0)
+                                : Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        16.0, 0, 0, 0),
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        fixedSize:
+                                            MaterialStateProperty.all<Size>(
+                                          const Size.fromWidth(100),
+                                        ),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                AppColors.primaryBackground),
+                                        elevation:
+                                            MaterialStateProperty.all<double>(
+                                                4.0),
+                                      ),
+                                      child: Text('Book now',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: AppColors.content,
+                                          )),
+                                      onPressed: () {
+                                        book!(data);
+                                      },
+                                    ),
+                                  ),
+                          ],
                         ),
                       )
                     ]),
