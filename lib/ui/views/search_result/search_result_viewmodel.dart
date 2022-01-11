@@ -3,22 +3,7 @@ import 'package:transitspot/app/app.locator.dart';
 import 'package:transitspot/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
-class SearchResultData {
-  final String date;
-  final String time;
-  final String price;
-  final String start;
-  final String destination;
-
-  SearchResultData({
-    required this.start,
-    required this.destination,
-    required this.date,
-    required this.time,
-    required this.price,
-  });
-}
+import 'package:transitspot/datamodels/search_result_data/search_result_data.dart';
 
 Future<List<SearchResultData>> search(String start, String destination) async {
   final data = [
