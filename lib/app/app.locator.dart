@@ -23,7 +23,7 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
 
 // Register dependencies
   locator.registerSingleton(NavigationService());
-  locator.registerSingleton(FirestoreService());
-  locator.registerSingleton(AuthenticationService());
+  locator.registerLazySingleton(() => FirestoreService());
+  locator.registerLazySingleton(() => AuthenticationService());
   locator.registerSingleton(UserService());
 }

@@ -1,12 +1,14 @@
 import 'package:stacked/stacked.dart';
 import 'package:transitspot/app/app.locator.dart';
 import 'package:transitspot/app/app.router.dart';
+import 'package:transitspot/services/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
+  final _authService = locator<AuthenticationService>();
   final String _title1 = 'Welcome back';
   final String _title2 = 'Services';
-  final String _uname = "Stephen Strange";
+  final String _uname = "Strange";
   final String _role = "Customer";
   // TODO: Add your viewModel properties here
   final List<Map<String, String>> _srvCustomer = [
@@ -45,5 +47,9 @@ class HomeViewModel extends BaseViewModel {
   static Future navigatePage(String page) async {
     final _navigationService = locator<NavigationService>();
     await _navigationService.navigateTo(page);
+  }
+
+  void logout() async {
+    await _authService.logOut();
   }
 }

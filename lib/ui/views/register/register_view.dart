@@ -124,7 +124,9 @@ class RegisterView extends StatelessWidget with $RegisterView {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              model.submit();
+                            },
                             elevation: 5,
                             padding: EdgeInsets.all(20),
                             child: Text("Submit"),

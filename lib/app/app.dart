@@ -17,8 +17,8 @@ import 'package:transitspot/ui/views/startup/startup_view.dart';
   ],
   dependencies: [
     Singleton(classType: NavigationService),
-    Singleton(classType: FirestoreService),
-    Singleton(classType: AuthenticationService),
+    LazySingleton(classType: FirestoreService),
+    LazySingleton(classType: AuthenticationService),
     Singleton(classType: UserService),
   ],
 )

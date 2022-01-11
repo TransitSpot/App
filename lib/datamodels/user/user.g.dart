@@ -10,7 +10,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       email: json['email'] as String,
       name: json['name'] as String,
       photoUrl: json['photoUrl'] as String,
-      isDriver: json['isDriver'] as bool,
+      isDriver: json['isDriver'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
