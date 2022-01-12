@@ -24,14 +24,14 @@ class HomeViewModel extends BaseViewModel {
     {
       'title': "Find on Demand",
       'img': 'lib/assets/home/distance.png',
-      'destination': Routes.registerView,
+      'destination': Routes.onDemandView,
     },
   ];
   final List<Map<String, String>> _srvDriver = [
     {
       'title': "Activate Services",
       'img': 'lib/assets/home/current_location.png',
-      'destination': Routes.onDemandView,
+      'destination': Routes.bookView,
     },
     {
       'title': "Open Map",

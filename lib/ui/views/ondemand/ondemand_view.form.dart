@@ -11,7 +11,7 @@ import 'package:stacked/stacked.dart';
 
 const String TargetValueKey = 'target';
 
-mixin $_OnDemandViewState on StatelessWidget {
+mixin $OnDemandView on StatelessWidget {
   final TextEditingController targetController = TextEditingController();
   final FocusNode targetFocusNode = FocusNode();
 
