@@ -34,7 +34,7 @@ class _$UserTearOff {
     );
   }
 
-  User fromJson(Map<String, Object?> json) {
+  User fromJson(Map<String, Object> json) {
     return User.fromJson(json);
   }
 }
@@ -159,7 +159,7 @@ class _$_User implements _User {
   final String name;
   @override
   final String photoUrl;
-  @JsonKey()
+  @JsonKey(defaultValue: true)
   @override
   final bool isDriver;
 
@@ -171,21 +171,26 @@ class _$_User implements _User {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _User &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.photoUrl, photoUrl) &&
-            const DeepCollectionEquality().equals(other.isDriver, isDriver));
+        (other is _User &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.photoUrl, photoUrl) ||
+                const DeepCollectionEquality()
+                    .equals(other.photoUrl, photoUrl)) &&
+            (identical(other.isDriver, isDriver) ||
+                const DeepCollectionEquality()
+                    .equals(other.isDriver, isDriver)));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(photoUrl),
-      const DeepCollectionEquality().hash(isDriver));
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(photoUrl) ^
+      const DeepCollectionEquality().hash(isDriver);
 
   @JsonKey(ignore: true)
   @override
@@ -208,13 +213,13 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  String get email;
+  String get email => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String get photoUrl;
+  String get photoUrl => throw _privateConstructorUsedError;
   @override
-  bool get isDriver;
+  bool get isDriver => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

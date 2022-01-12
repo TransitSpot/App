@@ -36,7 +36,7 @@ class _$SearchResultDataTearOff {
     );
   }
 
-  SearchResultData fromJson(Map<String, Object?> json) {
+  SearchResultData fromJson(Map<String, Object> json) {
     return SearchResultData.fromJson(json);
   }
 }
@@ -204,24 +204,28 @@ class _$_SearchResultData implements _SearchResultData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _SearchResultData &&
-            const DeepCollectionEquality().equals(other.start, start) &&
-            const DeepCollectionEquality()
-                .equals(other.destination, destination) &&
-            const DeepCollectionEquality().equals(other.date, date) &&
-            const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.price, price));
+        (other is _SearchResultData &&
+            (identical(other.start, start) ||
+                const DeepCollectionEquality().equals(other.start, start)) &&
+            (identical(other.destination, destination) ||
+                const DeepCollectionEquality()
+                    .equals(other.destination, destination)) &&
+            (identical(other.date, date) ||
+                const DeepCollectionEquality().equals(other.date, date)) &&
+            (identical(other.time, time) ||
+                const DeepCollectionEquality().equals(other.time, time)) &&
+            (identical(other.price, price) ||
+                const DeepCollectionEquality().equals(other.price, price)));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(start),
-      const DeepCollectionEquality().hash(destination),
-      const DeepCollectionEquality().hash(date),
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(price));
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(start) ^
+      const DeepCollectionEquality().hash(destination) ^
+      const DeepCollectionEquality().hash(date) ^
+      const DeepCollectionEquality().hash(time) ^
+      const DeepCollectionEquality().hash(price);
 
   @JsonKey(ignore: true)
   @override
@@ -246,15 +250,15 @@ abstract class _SearchResultData implements SearchResultData {
       _$_SearchResultData.fromJson;
 
   @override
-  String get start;
+  String get start => throw _privateConstructorUsedError;
   @override
-  String get destination;
+  String get destination => throw _privateConstructorUsedError;
   @override
-  String get date;
+  String get date => throw _privateConstructorUsedError;
   @override
-  String get time;
+  String get time => throw _privateConstructorUsedError;
   @override
-  String get price;
+  String get price => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SearchResultDataCopyWith<_SearchResultData> get copyWith =>
