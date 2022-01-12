@@ -127,8 +127,11 @@ class StackedRouter extends RouterBase {
       );
     },
     OnDemandView: (data) {
+      var args = data.getArgs<OnDemandViewArguments>(
+        orElse: () => OnDemandViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => OnDemandView(),
+        builder: (context) => OnDemandView(key: args.key),
         settings: data,
       );
     },
@@ -184,4 +187,10 @@ class SuccessViewArguments {
   final Key? key;
   final bool isOnDemand;
   SuccessViewArguments({this.key, required this.isOnDemand});
+}
+
+/// OnDemandView arguments holder class
+class OnDemandViewArguments {
+  final Key? key;
+  OnDemandViewArguments({this.key});
 }
