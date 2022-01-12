@@ -15,6 +15,7 @@ import '../ui/views/book/book_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/ondemand/ondemand_view.dart';
 import '../ui/views/order/order_view.dart';
+import '../ui/views/receive_req/receive_req_view.dart';
 import '../ui/views/register/register_view.dart';
 import '../ui/views/search_result/search_result_view.dart';
 import '../ui/views/setting/setting_view.dart';
@@ -31,6 +32,7 @@ class Routes {
   static const String successView = '/success-view';
   static const String onDemandView = '/on-demand-view';
   static const String settingView = '/setting-view';
+  static const String receiveReqView = '/receive-req-view';
   static const all = <String>{
     startupView,
     registerView,
@@ -41,6 +43,7 @@ class Routes {
     successView,
     onDemandView,
     settingView,
+    receiveReqView,
   };
 }
 
@@ -57,6 +60,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.successView, page: SuccessView),
     RouteDef(Routes.onDemandView, page: OnDemandView),
     RouteDef(Routes.settingView, page: SettingView),
+    RouteDef(Routes.receiveReqView, page: ReceiveReqView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -131,6 +135,12 @@ class StackedRouter extends RouterBase {
     SettingView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const SettingView(),
+        settings: data,
+      );
+    },
+    ReceiveReqView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ReceiveReqView(),
         settings: data,
       );
     },

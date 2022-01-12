@@ -229,10 +229,6 @@ class OrderView extends StatelessWidget with $OrderView {
                                         ),
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            // print("book");
-                                            // print(data);
-                                            // print(model.amountBook);
-                                            // print(model.paymentMethodValue);
                                             model.book();
                                           },
                                           child: Text('Book Now',
