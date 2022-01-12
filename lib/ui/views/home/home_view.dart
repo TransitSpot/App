@@ -5,6 +5,7 @@ import 'package:transitspot/ui/views/home/component/user_card.dart';
 import 'package:transitspot/ui/views/home/component/service_card.dart';
 import 'package:transitspot/ui/layout/has_login_view.dart';
 import 'package:stacked/stacked.dart';
+import 'package:transitspot/app/app.router.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -24,7 +25,8 @@ class HomeView extends StatelessWidget {
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () {
-                  model.logout();
+                  // model.logout();
+                  model.navigatePage(Routes.settingView);
                 },
                 child:
                     const Icon(Icons.settings, color: Colors.black, size: 35.0),
