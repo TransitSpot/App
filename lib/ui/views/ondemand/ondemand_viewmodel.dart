@@ -14,13 +14,46 @@ class OnDemandViewModel extends FormViewModel {
   List<PlacesAutoCompleteResult> get autocompleteResult => _autocompleteResult;
   bool get hasAutoCompleteResult => _autocompleteResult.isNotEmpty;
   Future<void> getAutoCompleteResult() async {
-    if (targetValue != null) {
-      final placesResult = await _placesService.getAutoComplete(targetValue!);
-      if (placesResult != null) {
-        _autocompleteResult = placesResult;
+    if (targetValue != null || targetValue != "") {
+      try {
+        final placesResult = await _placesService.getAutoComplete(targetValue!);
+        if (placesResult != null) {
+          _autocompleteResult = placesResult;
+          notifyListeners();
+        }
+      } catch (_) {
+        _autocompleteResult = [];
         notifyListeners();
       }
     }
+  }
+
+  Map<String, Marker> _markers = <String, Marker>{};
+  Map<String, Marker> get markers => _markers;
+
+  Future<void> getDestinationByPlaceId(String placeId) async {
+    PlacesDetails details = await _placesService.getPlaceDetails(placeId);
+    Marker destinationMarker = Marker(
+      markerId: const MarkerId('destination'),
+      infoWindow: const InfoWindow(title: 'destination'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      position: LatLng(
+        details.lat!,
+        details.lng!,
+      ),
+    );
+    _markers['destination'] = destinationMarker;
+    notifyListeners();
+  }
+
+  void getCurrentPositionAsMarker() {
+    Marker initialMarker = Marker(
+        markerId: const MarkerId('initial'),
+        infoWindow: const InfoWindow(title: 'initial'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        position: currentLatLng);
+    _markers['initial'] = initialMarker;
+    notifyListeners();
   }
 
   late GoogleMapController _googleMapController;
@@ -32,30 +65,29 @@ class OnDemandViewModel extends FormViewModel {
   );
   LatLng get currentLatLng => _currentLatLng;
 
-  CameraPosition _currentCameraPosition = const CameraPosition(
-    target: LatLng(
-      -6.186477,
-      106.8296487,
-    ),
-    zoom: 11.5,
-  );
-
-  CameraPosition get currentCameraPosition => _currentCameraPosition;
-
   Future<void> updateLatLng() async {
     Position currentPos = await _geolocatorService.getCurrentLocation();
     _currentLatLng = LatLng(currentPos.latitude, currentPos.longitude);
     notifyListeners();
   }
 
-  Future<CameraPosition> getCameraPosition() async {
-    await updateLatLng();
-    return CameraPosition(target: currentLatLng, zoom: 11.5);
+  CameraPosition getCameraPosition(LatLng latlng) {
+    return CameraPosition(target: latlng, zoom: 11.5);
   }
 
-  Future<void> updateCameraPosition() async {
-    _currentCameraPosition = await getCameraPosition();
+  void updateCameraPosition(CameraPosition camPosition) {
+    googleMapController.animateCamera(
+      CameraUpdate.newCameraPosition(camPosition),
+    );
     notifyListeners();
+  }
+
+  Future<void> updateCameraPositionToCurrentPos() async {
+    await updateLatLng();
+    getCurrentPositionAsMarker();
+    updateCameraPosition(
+      getCameraPosition(currentLatLng),
+    );
   }
 
   void setGoogleMapController(GoogleMapController controller) {

@@ -12,7 +12,7 @@ class StartupViewModel extends BaseViewModel {
 
   Future initialise() async {
     _placesService.initialize(
-        apiKey: "AIzaSyDubg0pkQNSf3ANDb8MahkLt6XF90VBlTE");
+        apiKey: "AIzaSyDhn_zud0m51QfDjShH8sbshcvdwxbwvPw");
     if (_authService.isUserLoggedIn()) {
       await _navigationService.navigateTo(Routes.homeView);
     } else {

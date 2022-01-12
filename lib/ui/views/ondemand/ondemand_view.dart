@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:places_service/places_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:transitspot/ui/views/ondemand/ondemand_viewmodel.dart';
@@ -16,7 +17,6 @@ class OnDemandView extends StatelessWidget with $OnDemandView {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<OnDemandViewModel>.reactive(
-      onModelReady: (viewModel) => {viewModel.updateCameraPosition()},
       onDispose: (model) => model.googleMapController.dispose(),
       builder: (context, model, child) => Scaffold(
         body: Stack(
@@ -26,9 +26,20 @@ class OnDemandView extends StatelessWidget with $OnDemandView {
               myLocationButtonEnabled: false,
               zoomControlsEnabled: false,
               zoomGesturesEnabled: true,
-              initialCameraPosition: model.currentCameraPosition,
-              onMapCreated: (controller) =>
-                  model.setGoogleMapController(controller),
+              initialCameraPosition:
+                  model.getCameraPosition(model.currentLatLng),
+              onMapCreated: (controller) async {
+                await model.updateLatLng();
+                model.setGoogleMapController(controller);
+                model.updateCameraPositionToCurrentPos();
+                model.getCurrentPositionAsMarker();
+                listenToFormUpdated(model);
+              },
+              markers: {
+                if (model.markers['initial'] != null) model.markers['initial']!,
+                if (model.markers['destination'] != null)
+                  model.markers['destination']!,
+              },
             ),
             Positioned(
               top: 40,
@@ -45,12 +56,18 @@ class OnDemandView extends StatelessWidget with $OnDemandView {
                           hintText: "Enter your target destination",
                         ),
                         controller: targetController,
+                        focusNode: targetFocusNode,
                       ),
                       if (!model.hasAutoCompleteResult)
                         const Text("No suggestion available"),
                       if (model.hasAutoCompleteResult)
                         ...model.autocompleteResult.map(
                           (autoCompleteResult) => ListTile(
+                            onTap: () async {
+                              await model.getDestinationByPlaceId(
+                                  autoCompleteResult.placeId!);
+                              targetController.clear();
+                            },
                             title: Text(autoCompleteResult.mainText ?? " "),
                             subtitle:
                                 Text(autoCompleteResult.secondaryText ?? " "),
@@ -65,9 +82,7 @@ class OnDemandView extends StatelessWidget with $OnDemandView {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            await model.updateCameraPosition();
-            model.googleMapController.animateCamera(
-                CameraUpdate.newCameraPosition(model.currentCameraPosition));
+            model.updateCameraPositionToCurrentPos();
           },
           backgroundColor: AppColors.primaryBackground,
           child: const Icon(
