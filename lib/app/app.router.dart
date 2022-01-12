@@ -13,6 +13,7 @@ import 'package:stacked/stacked_annotations.dart';
 import '../datamodels/search_result_data/search_result_data.dart';
 import '../ui/views/book/book_view.dart';
 import '../ui/views/home/home_view.dart';
+import '../ui/views/ondemand/ondemand_view.dart';
 import '../ui/views/order/order_view.dart';
 import '../ui/views/register/register_view.dart';
 import '../ui/views/search_result/search_result_view.dart';
@@ -27,6 +28,7 @@ class Routes {
   static const String searchResultView = '/search-result-view';
   static const String orderView = '/order-view';
   static const String successView = '/success-view';
+  static const String onDemandView = '/on-demand-view';
   static const all = <String>{
     startupView,
     registerView,
@@ -35,6 +37,7 @@ class Routes {
     searchResultView,
     orderView,
     successView,
+    onDemandView,
   };
 }
 
@@ -49,6 +52,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.searchResultView, page: SearchResultView),
     RouteDef(Routes.orderView, page: OrderView),
     RouteDef(Routes.successView, page: SuccessView),
+    RouteDef(Routes.onDemandView, page: OnDemandView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -111,6 +115,12 @@ class StackedRouter extends RouterBase {
           key: args.key,
           isOnDemand: args.isOnDemand,
         ),
+        settings: data,
+      );
+    },
+    OnDemandView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const OnDemandView(),
         settings: data,
       );
     },

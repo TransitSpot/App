@@ -43,6 +43,9 @@ dependencies:
   cloud_firestore: 
   places_service:
   geolocator:
+  dio:
+  flutter_polyline_points: 
+  google_maps_flutter:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

@@ -31,7 +31,7 @@ class HomeViewModel extends BaseViewModel {
     {
       'title': "Activate Services",
       'img': 'lib/assets/home/current_location.png',
-      'destination': Routes.bookView,
+      'destination': Routes.onDemandView,
     },
     {
       'title': "Open Map",

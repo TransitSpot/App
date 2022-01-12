@@ -7,6 +7,7 @@ import 'package:transitspot/services/geolocator_service.dart';
 import 'package:transitspot/services/user_service.dart';
 import 'package:transitspot/ui/views/book/book_view.dart';
 import 'package:transitspot/ui/views/home/home_view.dart';
+import 'package:transitspot/ui/views/ondemand/ondemand_view.dart';
 import 'package:transitspot/ui/views/register/register_view.dart';
 import 'package:transitspot/ui/views/search_result/search_result_view.dart';
 import 'package:transitspot/ui/views/startup/startup_view.dart';
@@ -22,6 +23,7 @@ import 'package:transitspot/ui/views/success/success_view.dart';
     MaterialRoute(page: SearchResultView),
     MaterialRoute(page: OrderView),
     MaterialRoute(page: SuccessView),
+    MaterialRoute(page: OnDemandView),
   ],
   dependencies: [
     Singleton(classType: NavigationService),
