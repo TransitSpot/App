@@ -21,10 +21,9 @@ class OrderViewModel extends FormViewModel {
   int get amountBook => _amountBook;
 
   Future book() async {
-    const bool isOnDemand = false;
     final _navigationService = locator<NavigationService>();
     await _navigationService.navigateTo(Routes.successView,
-        arguments: SuccessViewArguments(isOnDemand: isOnDemand));
+        arguments: SuccessViewArguments(pageKind: 'TRANSACTION'));
   }
 
   Future navigatePage(String page) async {
