@@ -14,6 +14,7 @@ import 'package:transitspot/ui/views/startup/startup_view.dart';
 import 'package:transitspot/ui/views/order/order_view.dart';
 import 'package:transitspot/ui/views/success/success_view.dart';
 import 'package:transitspot/ui/views/setting/setting_view.dart';
+import 'package:transitspot/ui/views/receive_req/receive_req_view.dart';
 
 @StackedApp(
   routes: [
@@ -26,6 +27,7 @@ import 'package:transitspot/ui/views/setting/setting_view.dart';
     MaterialRoute(page: SuccessView),
     MaterialRoute(page: OnDemandView),
     MaterialRoute(page: SettingView),
+    MaterialRoute(page: ReceiveReqView),
   ],
   dependencies: [
     Singleton(classType: NavigationService),
