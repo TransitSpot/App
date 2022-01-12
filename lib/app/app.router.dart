@@ -17,6 +17,7 @@ import '../ui/views/order/order_view.dart';
 import '../ui/views/register/register_view.dart';
 import '../ui/views/search_result/search_result_view.dart';
 import '../ui/views/startup/startup_view.dart';
+import '../ui/views/success/success_view.dart';
 
 class Routes {
   static const String startupView = '/';
@@ -25,6 +26,7 @@ class Routes {
   static const String bookView = '/book-view';
   static const String searchResultView = '/search-result-view';
   static const String orderView = '/order-view';
+  static const String successView = '/success-view';
   static const all = <String>{
     startupView,
     registerView,
@@ -32,6 +34,7 @@ class Routes {
     bookView,
     searchResultView,
     orderView,
+    successView,
   };
 }
 
@@ -45,6 +48,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.bookView, page: BookView),
     RouteDef(Routes.searchResultView, page: SearchResultView),
     RouteDef(Routes.orderView, page: OrderView),
+    RouteDef(Routes.successView, page: SuccessView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -100,6 +104,16 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    SuccessView: (data) {
+      var args = data.getArgs<SuccessViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SuccessView(
+          key: args.key,
+          isOnDemand: args.isOnDemand,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -133,4 +147,11 @@ class OrderViewArguments {
   final Key? key;
   final SearchResultData data;
   OrderViewArguments({this.key, required this.data});
+}
+
+/// SuccessView arguments holder class
+class SuccessViewArguments {
+  final Key? key;
+  final bool isOnDemand;
+  SuccessViewArguments({this.key, required this.isOnDemand});
 }

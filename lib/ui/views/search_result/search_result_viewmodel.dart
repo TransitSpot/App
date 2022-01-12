@@ -8,29 +8,40 @@ import 'package:transitspot/datamodels/search_result_data/search_result_data.dar
 Future<List<SearchResultData>> search(String start, String destination) async {
   final data = [
     SearchResultData(
-        start: start,
-        destination: destination,
-        date: '2020-01-01',
-        time: '10:00',
-        price: 'Rp. 100.000'),
+      start: start,
+      destination: destination,
+      date: '02 Jan 2022',
+      time: '06.45 - 13.00',
+      price: 'Rp. 100.000',
+      id: '1',
+      avail: 50,
+      name: "Hogwarts Express",
+    ),
     SearchResultData(
-        start: start,
-        destination: destination,
-        date: '2020-01-01',
-        time: '10:00',
-        price: 'Rp. 100.000'),
+      start: start,
+      destination: destination,
+      date: '03 Jan 2022',
+      time: '08.45 - 15.00',
+      price: 'Rp. 80.000',
+      id: '2',
+      avail: 50,
+      name: "Hogwarts Express",
+    ),
     SearchResultData(
-        start: start,
-        destination: destination,
-        date: '2020-01-01',
-        time: '10:00',
-        price: 'Rp. 100.000'),
+      start: start,
+      destination: destination,
+      date: '02 Jan 2022',
+      time: '13.45 - 21.00',
+      price: 'Rp. 170.000',
+      id: '3',
+      avail: 50,
+      name: "Hogwarts Express",
+    ),
   ];
   return data;
 }
 
 class SearchResultViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
   final String _start = '';
   final String _destination = '';
   Future<List<SearchResultData>>? searchRes;
@@ -40,8 +51,6 @@ class SearchResultViewModel extends BaseViewModel {
 
   Future getData(String start, String destination) async {
     setBusy(true);
-    print(start);
-    print(destination);
     searchRes = search(start, destination);
     setBusy(false);
   }
@@ -49,5 +58,14 @@ class SearchResultViewModel extends BaseViewModel {
   Future navigatePage(String page) async {
     final _navigationService = locator<NavigationService>();
     await _navigationService.navigateTo(page);
+  }
+
+  Future book(SearchResultData data) async {
+    print(data);
+    final _navigationService = locator<NavigationService>();
+    await _navigationService.navigateTo(
+      Routes.orderView,
+      arguments: OrderViewArguments(data: data),
+    );
   }
 }

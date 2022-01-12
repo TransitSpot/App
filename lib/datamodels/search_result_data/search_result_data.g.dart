@@ -13,6 +13,9 @@ _$_SearchResultData _$$_SearchResultDataFromJson(Map<String, dynamic> json) =>
       date: json['date'] as String,
       time: json['time'] as String,
       price: json['price'] as String,
+      id: json['id'] as String,
+      name: json['name'] as String,
+      avail: json['avail'] as int,
     );
 
 Map<String, dynamic> _$$_SearchResultDataToJson(_$_SearchResultData instance) =>
@@ -22,4 +25,7 @@ Map<String, dynamic> _$$_SearchResultDataToJson(_$_SearchResultData instance) =>
       'date': instance.date,
       'time': instance.time,
       'price': instance.price,
+      'id': instance.id,
+      'name': instance.name,
+      'avail': instance.avail,
     };

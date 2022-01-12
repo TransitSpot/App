@@ -10,19 +10,21 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 const String AmountValueKey = 'amount';
-const String MethodValueKey = 'method';
+const String PaymentMethodValueKey = 'paymentMethod';
+
+const Map<String, String> PaymentMethodValueToTitleMap = {
+  'credit_card': 'Credit Card',
+  'paypal': 'Paypal',
+};
 
 mixin $OrderView on StatelessWidget {
   final TextEditingController amountController = TextEditingController();
-  final TextEditingController methodController = TextEditingController();
   final FocusNode amountFocusNode = FocusNode();
-  final FocusNode methodFocusNode = FocusNode();
 
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
   void listenToFormUpdated(FormViewModel model) {
     amountController.addListener(() => _updateFormData(model));
-    methodController.addListener(() => _updateFormData(model));
   }
 
   /// Updates the formData on the FormViewModel
@@ -30,7 +32,6 @@ mixin $OrderView on StatelessWidget {
         model.formValueMap
           ..addAll({
             AmountValueKey: amountController.text,
-            MethodValueKey: methodController.text,
           }),
       );
 
@@ -40,17 +41,21 @@ mixin $OrderView on StatelessWidget {
 
     amountController.dispose();
     amountFocusNode.dispose();
-    methodController.dispose();
-    methodFocusNode.dispose();
   }
 }
 
 extension ValueProperties on FormViewModel {
   String? get amountValue => this.formValueMap[AmountValueKey];
-  String? get methodValue => this.formValueMap[MethodValueKey];
+  String? get paymentMethodValue => this.formValueMap[PaymentMethodValueKey];
 
   bool get hasAmount => this.formValueMap.containsKey(AmountValueKey);
-  bool get hasMethod => this.formValueMap.containsKey(MethodValueKey);
+  bool get hasPaymentMethod =>
+      this.formValueMap.containsKey(PaymentMethodValueKey);
 }
 
-extension Methods on FormViewModel {}
+extension Methods on FormViewModel {
+  void setPaymentMethod(String paymentMethod) {
+    this.setData(
+        this.formValueMap..addAll({PaymentMethodValueKey: paymentMethod}));
+  }
+}
