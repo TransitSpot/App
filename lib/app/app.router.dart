@@ -121,7 +121,7 @@ class StackedRouter extends RouterBase {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SuccessView(
           key: args.key,
-          isOnDemand: args.isOnDemand,
+          pageKind: args.pageKind,
         ),
         settings: data,
       );
@@ -185,8 +185,14 @@ class OrderViewArguments {
 /// SuccessView arguments holder class
 class SuccessViewArguments {
   final Key? key;
-  final bool isOnDemand;
-  SuccessViewArguments({this.key, required this.isOnDemand});
+  final String pageKind;
+  SuccessViewArguments({this.key, required this.pageKind});
+}
+
+/// OnDemandView arguments holder class
+class OnDemandViewArguments {
+  final Key? key;
+  OnDemandViewArguments({this.key});
 }
 
 /// OnDemandView arguments holder class
