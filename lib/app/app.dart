@@ -5,6 +5,7 @@ import 'package:transitspot/services/authentication_service.dart';
 import 'package:transitspot/services/directions_service.dart';
 import 'package:transitspot/services/firestore_service.dart';
 import 'package:transitspot/services/geolocator_service.dart';
+import 'package:transitspot/services/request_service.dart';
 import 'package:transitspot/services/user_service.dart';
 import 'package:transitspot/ui/views/book/book_view.dart';
 import 'package:transitspot/ui/views/home/home_view.dart';
@@ -36,6 +37,7 @@ import 'package:transitspot/ui/views/receive_req/receive_req_view.dart';
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: PlacesService),
     LazySingleton(classType: DirectionsService),
+    LazySingleton(classType: RequestService),
     Singleton(classType: UserService),
     Singleton(classType: GeolocatorService),
   ],
