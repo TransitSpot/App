@@ -10,13 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../datamodels/request/request.dart';
 import '../datamodels/search_result_data/search_result_data.dart';
+import '../ui/views/accept_req/accept_req_view.dart';
 import '../ui/views/book/book_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/ondemand/ondemand_view.dart';
 import '../ui/views/order/order_view.dart';
 import '../ui/views/receive_req/receive_req_view.dart';
 import '../ui/views/register/register_view.dart';
+import '../ui/views/request_list/request_list_view.dart';
 import '../ui/views/search_result/search_result_view.dart';
 import '../ui/views/setting/setting_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -33,6 +36,8 @@ class Routes {
   static const String onDemandView = '/on-demand-view';
   static const String settingView = '/setting-view';
   static const String receiveReqView = '/receive-req-view';
+  static const String requestListView = '/request-list-view';
+  static const String acceptReqView = '/accept-req-view';
   static const all = <String>{
     startupView,
     registerView,
@@ -44,6 +49,8 @@ class Routes {
     onDemandView,
     settingView,
     receiveReqView,
+    requestListView,
+    acceptReqView,
   };
 }
 
@@ -61,6 +68,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.onDemandView, page: OnDemandView),
     RouteDef(Routes.settingView, page: SettingView),
     RouteDef(Routes.receiveReqView, page: ReceiveReqView),
+    RouteDef(Routes.requestListView, page: RequestListView),
+    RouteDef(Routes.acceptReqView, page: AcceptReqView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -142,8 +151,31 @@ class StackedRouter extends RouterBase {
       );
     },
     ReceiveReqView: (data) {
+      var args = data.getArgs<ReceiveReqViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const ReceiveReqView(),
+        builder: (context) => ReceiveReqView(
+          key: args.key,
+          request: args.request,
+        ),
+        settings: data,
+      );
+    },
+    RequestListView: (data) {
+      var args = data.getArgs<RequestListViewArguments>(
+        orElse: () => RequestListViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => RequestListView(key: args.key),
+        settings: data,
+      );
+    },
+    AcceptReqView: (data) {
+      var args = data.getArgs<AcceptReqViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AcceptReqView(
+          key: args.key,
+          request: args.request,
+        ),
         settings: data,
       );
     },
@@ -193,4 +225,24 @@ class SuccessViewArguments {
 class OnDemandViewArguments {
   final Key? key;
   OnDemandViewArguments({this.key});
+}
+
+/// ReceiveReqView arguments holder class
+class ReceiveReqViewArguments {
+  final Key? key;
+  final Request request;
+  ReceiveReqViewArguments({this.key, required this.request});
+}
+
+/// RequestListView arguments holder class
+class RequestListViewArguments {
+  final Key? key;
+  RequestListViewArguments({this.key});
+}
+
+/// AcceptReqView arguments holder class
+class AcceptReqViewArguments {
+  final Key? key;
+  final Request request;
+  AcceptReqViewArguments({this.key, required this.request});
 }

@@ -4,9 +4,12 @@ import 'package:transitspot/ui/views/receive_req/receive_req_viewmodel.dart';
 import 'package:transitspot/utils/app_color.dart';
 import 'package:transitspot/ui/layout/has_login_view.dart';
 import 'package:transitspot/app/app.router.dart';
+import 'package:transitspot/datamodels/request/request.dart';
 
 class ReceiveReqView extends StatelessWidget {
-  const ReceiveReqView({Key? key}) : super(key: key);
+  final Request request;
+
+  const ReceiveReqView({Key? key, required this.request}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +26,11 @@ class ReceiveReqView extends StatelessWidget {
                 onPressed: () {
                   model.navigatePage(Routes.homeView);
                 },
-                child: const Icon(Icons.arrow_back_ios_new,
-                    color: Colors.black, size: 35.0),
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.black,
+                  size: 35.0,
+                ),
                 backgroundColor: AppColors.primaryBackground,
               ),
             ),
@@ -41,7 +47,7 @@ class ReceiveReqView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Stephen Strange has requested to follow you',
+                        '${request.customerName} has requested to follow you',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20.0,
@@ -59,14 +65,18 @@ class ReceiveReqView extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
                             child: ElevatedButton(
                               onPressed: () {
-                                // TODO:
-                                model.navigatePage(Routes.homeView);
+                                // TODO: change to live location
+                                // model.navigatePage(Routes.acceptReqView);
+                                model.acceptRequest(request);
                               },
-                              child: Text('See Live Location',
-                                  style: TextStyle(
-                                      color: AppColors.primaryBackground,
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.w700)),
+                              child: Text(
+                                'See Live Location',
+                                style: TextStyle(
+                                  color: AppColors.primaryBackground,
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -75,20 +85,6 @@ class ReceiveReqView extends StatelessWidget {
                                     MaterialStateProperty.all<double>(4.0),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          // TODO:
-                          model.navigatePage(Routes.homeView);
-                        },
-                        child: Text(
-                          'or See All Request',
-                          style: TextStyle(
-                            color: AppColors.content,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),

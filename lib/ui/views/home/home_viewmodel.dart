@@ -34,9 +34,9 @@ class HomeViewModel extends BaseViewModel {
       'destination': Routes.bookView,
     },
     {
-      'title': "Receive Requests",
+      'title': "Open Map",
       'img': 'lib/assets/home/distance.png',
-      'destination': Routes.receiveReqView,
+      'destination': Routes.requestListView,
     },
   ];
 

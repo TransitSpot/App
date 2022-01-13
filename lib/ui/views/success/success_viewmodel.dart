@@ -16,30 +16,30 @@ class pageData {
   pageData(String kind) {
     switch (kind) {
       case 'TRANSACTION':
-        this.title = 'Yeay! Transaksi berhasil diproses';
-        this.mainRoute = Routes.homeView;
-        this.mainRouteTitle = 'Back to Home';
-        this.backRoute = Routes.bookView;
-        this.hasOptionalRoute = false;
+        title = 'Yeay! Transaksi berhasil diproses';
+        mainRoute = Routes.homeView;
+        mainRouteTitle = 'Back to Home';
+        backRoute = Routes.bookView;
+        hasOptionalRoute = false;
         break;
       case 'BOOK':
-        this.title = 'Yeay! Pemesanan berhasil diproses';
+        title = 'Yeay! Pemesanan berhasil diproses';
         //TODO: change to live location
-        this.mainRoute = Routes.onDemandView;
-        this.mainRouteTitle = 'Share Live Location';
-        this.optionalRoute = Routes.homeView;
-        this.backRoute = Routes.onDemandView;
-        this.hasOptionalRoute = true;
-        this.optionalRouteTitle = 'or back to home';
+        mainRoute = Routes.onDemandView;
+        mainRouteTitle = 'Share Live Location';
+        optionalRoute = Routes.homeView;
+        backRoute = Routes.onDemandView;
+        hasOptionalRoute = true;
+        optionalRouteTitle = 'or back to home';
         break;
       case 'REQUEST':
-        this.title = 'Yeay! Your Request has been Accepted';
-        this.mainRoute = Routes.onDemandView; //TODO: change to driver location
-        this.mainRouteTitle = "See Driver's location";
-        this.optionalRoute = Routes.homeView;
-        this.backRoute = Routes.onDemandView; // TODO: check again route
-        this.hasOptionalRoute = true;
-        this.optionalRouteTitle = 'or back to home';
+        title = 'Yeay! Your Request has been Accepted';
+        mainRoute = Routes.onDemandView; //TODO: change to driver location
+        mainRouteTitle = "See Driver's location";
+        optionalRoute = Routes.homeView;
+        backRoute = Routes.onDemandView; // TODO: check again route
+        hasOptionalRoute = true;
+        optionalRouteTitle = 'or back to home';
     }
   }
 }
