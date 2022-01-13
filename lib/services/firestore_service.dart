@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:transitspot/datamodels/livestream/livestream.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:transitspot/datamodels/location_lat_lng/location_lat_lng.dart';
 import 'package:transitspot/datamodels/request/request.dart';
 import 'package:transitspot/datamodels/user/user.dart';
 
@@ -16,12 +17,16 @@ class FirestoreService {
             toFirestore: (request, _) => request.toJson(),
           );
 
-  final CollectionReference<Livestream> livestreamCollectionReference =
-      FirebaseFirestore.instance
-          .collection('livestream')
-          .withConverter<Livestream>(
-            fromFirestore: (snapshot, _) =>
-                Livestream.fromJson(snapshot.data()!),
-            toFirestore: (livestream, _) => livestream.toJson(),
-          );
+  CollectionReference<LocationLatLng> getRequestLocationReference(
+      String requestId) {
+    return FirebaseFirestore.instance
+        .collection('request')
+        .doc(requestId)
+        .collection("location")
+        .withConverter<LocationLatLng>(
+          fromFirestore: (snapshot, _) =>
+              LocationLatLng.fromJson(snapshot.data()!),
+          toFirestore: (request, _) => request.toJson(),
+        );
+  }
 }

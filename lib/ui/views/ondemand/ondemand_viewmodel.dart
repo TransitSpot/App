@@ -76,6 +76,16 @@ class OnDemandViewModel extends FormViewModel {
     notifyListeners();
   }
 
+  void getDriverPositionAsMarker() {
+    Marker driverMarker = Marker(
+        markerId: const MarkerId('driver'),
+        infoWindow: const InfoWindow(title: 'driver'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        position: driverLatLng!);
+    _markers['driver'] = driverMarker;
+    notifyListeners();
+  }
+
   late GoogleMapController _googleMapController;
   GoogleMapController get googleMapController => _googleMapController;
 
@@ -84,6 +94,8 @@ class OnDemandViewModel extends FormViewModel {
     106.8296487,
   );
   LatLng get currentLatLng => _currentLatLng;
+  LatLng? _driverLatLng;
+  LatLng? get driverLatLng => _driverLatLng;
 
   Future<void> updateLatLng() async {
     Position currentPos = await _geolocatorService.getCurrentLocation();
@@ -153,6 +165,21 @@ class OnDemandViewModel extends FormViewModel {
         );
 
         if (isAccepted) {
+          _isRequestAccepted = true;
+          _requestService.getDriverLiveStream(requestId).listen((event) async {
+            final data = event.data()!;
+            _driverLatLng = LatLng(data.latitude, data.longitude);
+            notifyListeners();
+            getDriverPositionAsMarker();
+            updateCameraPosition(getCameraPosition(_driverLatLng!));
+
+            _directionsInfo = await _directionsService.getDirections(
+              destination: markers['driver']!.position,
+              origin: _markers['initial']!.position,
+            );
+            notifyListeners();
+          });
+          notifyListeners();
           break;
         }
         if (timerCountdown == 0) {
@@ -164,6 +191,9 @@ class OnDemandViewModel extends FormViewModel {
       _timerCountdown = 10;
     }
   }
+
+  bool _isRequestAccepted = false;
+  bool get isRequestAccepted => _isRequestAccepted;
 
   @override
   void setFormStatus() {
