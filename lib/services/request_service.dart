@@ -18,6 +18,10 @@ class RequestService {
     return _requestService.snapshots();
   }
 
+  Stream<DocumentSnapshot<Request>> getDocStream(String id) {
+    return _requestService.doc(id).snapshots();
+  }
+
   Future<void> markRequestAsExpired(String requestId) async {
     await _requestService.doc(requestId).update({"isExpired": true});
   }

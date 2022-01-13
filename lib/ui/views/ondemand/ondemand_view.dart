@@ -17,7 +17,9 @@ class OnDemandView extends StatelessWidget with $OnDemandView {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<OnDemandViewModel>.reactive(
-      onDispose: (model) => model.googleMapController.dispose(),
+      onDispose: (model) {
+        model.googleMapController.dispose();
+      },
       builder: (context, model, child) => Scaffold(
           body: Stack(
             alignment: Alignment.center,
@@ -150,30 +152,35 @@ class OnDemandView extends StatelessWidget with $OnDemandView {
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(8),
             child: MaterialButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Text('Requesting for driver'),
-                    content: const Text('Waiting for 10s'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+              onPressed: () async {
+                showRequestAlert(context, model.timerCountdown);
+                await model.sendRequest();
               },
-              child: Text("Request"),
+              child: const Text("Request"),
               color: AppColors.secondaryBackground,
               textColor: Colors.white,
             ),
           )),
       viewModelBuilder: () => OnDemandViewModel(),
+    );
+  }
+
+  Future<dynamic> showRequestAlert(BuildContext context, int time) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Requesting for driver'),
+        content: Text('Waiting for $time second'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

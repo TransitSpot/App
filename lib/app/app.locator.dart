@@ -15,6 +15,8 @@ import '../services/authentication_service.dart';
 import '../services/directions_service.dart';
 import '../services/firestore_service.dart';
 import '../services/geolocator_service.dart';
+import '../services/livestream_service.dart';
+import '../services/request_service.dart';
 import '../services/user_service.dart';
 
 final locator = StackedLocator.instance;
@@ -30,6 +32,8 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => PlacesService());
   locator.registerLazySingleton(() => DirectionsService());
+  locator.registerLazySingleton(() => RequestService());
+  locator.registerLazySingleton(() => LivestreamService());
   locator.registerSingleton(UserService());
   locator.registerSingleton(GeolocatorService());
 }
