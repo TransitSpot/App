@@ -60,13 +60,15 @@ class SearchResultView extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
                             child: Column(
-                              children: snapshot.data!.map((datum) {
-                                return CardResult(
-                                  data: datum,
-                                  hasButton: true,
-                                  book: model.book,
-                                );
-                              }).toList(),
+                              children: snapshot.data!.map(
+                                (datum) {
+                                  return CardResult(
+                                    data: datum,
+                                    hasButton: true,
+                                    book: model.book,
+                                  );
+                                },
+                              ).toList(),
                             ),
                           );
                         } else if (snapshot.hasError) {
