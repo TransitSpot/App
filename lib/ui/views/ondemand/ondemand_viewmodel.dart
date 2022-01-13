@@ -3,12 +3,15 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:places_service/places_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:transitspot/app/app.locator.dart';
+import 'package:transitspot/datamodels/direction/directions.dart';
+import 'package:transitspot/services/directions_service.dart';
 import 'package:transitspot/services/geolocator_service.dart';
 import 'ondemand_view.form.dart';
 
 class OnDemandViewModel extends FormViewModel {
   final _geolocatorService = locator<GeolocatorService>();
   final _placesService = locator<PlacesService>();
+  final _directionsService = locator<DirectionsService>();
 
   List<PlacesAutoCompleteResult> _autocompleteResult = [];
   List<PlacesAutoCompleteResult> get autocompleteResult => _autocompleteResult;
@@ -30,19 +33,27 @@ class OnDemandViewModel extends FormViewModel {
 
   Map<String, Marker> _markers = <String, Marker>{};
   Map<String, Marker> get markers => _markers;
+  Directions? _directionsInfo;
+  Directions? get directionsInfo => _directionsInfo;
 
   Future<void> getDestinationByPlaceId(String placeId) async {
     PlacesDetails details = await _placesService.getPlaceDetails(placeId);
     Marker destinationMarker = Marker(
       markerId: const MarkerId('destination'),
       infoWindow: const InfoWindow(title: 'destination'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       position: LatLng(
         details.lat!,
         details.lng!,
       ),
     );
     _markers['destination'] = destinationMarker;
+
+    _directionsInfo = await _directionsService.getDirections(
+      destination: destinationMarker.position,
+      origin: _markers['initial']!.position,
+    );
+
     notifyListeners();
   }
 
@@ -50,7 +61,7 @@ class OnDemandViewModel extends FormViewModel {
     Marker initialMarker = Marker(
         markerId: const MarkerId('initial'),
         infoWindow: const InfoWindow(title: 'initial'),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
         position: currentLatLng);
     _markers['initial'] = initialMarker;
     notifyListeners();
