@@ -194,9 +194,3 @@ class OnDemandViewArguments {
   final Key? key;
   OnDemandViewArguments({this.key});
 }
-
-/// OnDemandView arguments holder class
-class OnDemandViewArguments {
-  final Key? key;
-  OnDemandViewArguments({this.key});
-}
