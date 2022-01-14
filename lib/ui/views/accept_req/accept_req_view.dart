@@ -82,8 +82,8 @@ class AcceptReqView extends StatelessWidget {
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(8),
             child: MaterialButton(
-              onPressed: () {
-                model.navigatePage(Routes.requestListView);
+              onPressed: () async {
+                await model.acceptRequest(requestId, request);
               },
               child: const Text("Accept Request"),
               color: AppColors.darkSecondaryBackground,
