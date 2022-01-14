@@ -18,7 +18,10 @@ class RequestListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RequestListViewModel>.reactive(
-      onModelReady: (viewModel) => {viewModel.getData()},
+      onModelReady: (viewModel) async {
+        await viewModel.getData();
+        await viewModel.broadcastPosition();
+      },
       onDispose: (model) => model.googleMapController.dispose(),
       builder: (context, model, child) => Scaffold(
         body: Stack(

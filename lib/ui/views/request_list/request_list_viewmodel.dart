@@ -4,6 +4,7 @@ import 'package:places_service/places_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:transitspot/app/app.locator.dart';
 import 'package:transitspot/datamodels/direction/directions.dart';
+import 'package:transitspot/datamodels/location_lat_lng/location_lat_lng.dart';
 import 'package:transitspot/services/directions_service.dart';
 import 'package:transitspot/services/driver_state_service.dart';
 import 'package:transitspot/services/geolocator_service.dart';
@@ -72,6 +73,7 @@ class RequestListViewModel extends ReactiveViewModel {
   final _navigationService = locator<NavigationService>();
   final Stream<QuerySnapshot<Request>> _requestStream =
       locator<RequestService>().getStream();
+  final _requestService = locator<RequestService>();
   final DriverStateService _driverStateService = locator<DriverStateService>();
 
   @override
@@ -167,6 +169,27 @@ class RequestListViewModel extends ReactiveViewModel {
     updateCameraPosition(
       getCameraPosition(currentLatLng),
     );
+  }
+
+  bool get isRequestAcceptedAvailable =>
+      _driverStateService.acceptedRequestsId.length != 0;
+
+  Future<void> broadcastPosition() async {
+    while (true) {
+      await Future.delayed(
+        const Duration(milliseconds: 2000),
+        () async {
+          for (String requestId in _driverStateService.acceptedRequestsId) {
+            await updateLatLng();
+            await _requestService.updateDriverLatLng(
+              requestId,
+              _currentLatLng,
+            );
+          }
+          notifyListeners();
+        },
+      );
+    }
   }
 
   void setGoogleMapController(GoogleMapController controller) {
