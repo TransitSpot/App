@@ -44,41 +44,95 @@ class SearchResultView extends StatelessWidget {
         body: HasLoginView(
           childWidget: SingleChildScrollView(
             child: SafeArea(
-              child: Column(children: [
-                const SizedBox(
-                  height: 100.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 0,
-                    horizontal: 16.0,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 100.0,
                   ),
-                  child: FutureBuilder<List<SearchResultData>>(
-                      future: model.searchRes,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
-                            child: Column(
-                              children: snapshot.data!.map(
-                                (datum) {
-                                  return CardResult(
-                                    data: datum,
-                                    hasButton: true,
-                                    book: model.book,
-                                  );
-                                },
-                              ).toList(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 16.0,
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black38,
+                            blurRadius: 5.0,
+                            spreadRadius: 1.0,
+                            offset: Offset(
+                                5.0, 8.0), // shadow direction: bottom right
+                          )
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                          vertical: 20.0,
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Menampilkan hasil pencarian dari $start ke $destination',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18.0,
+                                color: AppColors.content,
+                              ),
                             ),
-                          );
-                        } else if (snapshot.hasError) {
-                          return Text("${snapshot.error}");
-                        }
+                            Divider(
+                              color: AppColors.secondaryBackground,
+                              thickness: 5.0,
+                              height: 20.0,
+                              indent: MediaQuery.of(context).size.width * 0.35,
+                              endIndent:
+                                  MediaQuery.of(context).size.width * 0.35,
+                            ),
+                            const Divider(
+                              color: Colors.grey,
+                              thickness: 1.0,
+                              height: 20.0,
+                            ),
+                            FutureBuilder<List<SearchResultData>>(
+                                future: model.searchRes,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 0, 0, 12.0),
+                                      child: Column(
+                                        children: snapshot.data!.map(
+                                          (datum) {
+                                            return CardResult(
+                                              data: datum,
+                                              hasButton: true,
+                                              book: model.book,
+                                            );
+                                          },
+                                        ).toList(),
+                                      ),
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return Text("${snapshot.error}");
+                                  }
 
-                        return const CircularProgressIndicator();
-                      }),
-                )
-              ]),
+                                  return const CircularProgressIndicator();
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
