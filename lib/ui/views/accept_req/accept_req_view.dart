@@ -11,8 +11,11 @@ import 'package:transitspot/app/app.router.dart';
 
 class AcceptReqView extends StatelessWidget {
   final Request request;
+  final String requestId;
 
-  const AcceptReqView({Key? key, required this.request}) : super(key: key);
+  const AcceptReqView(
+      {Key? key, required this.request, required this.requestId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

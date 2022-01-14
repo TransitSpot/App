@@ -78,10 +78,14 @@ class RequestListView extends StatelessWidget {
                           children: snapshot.data!.docs.map(
                             (DocumentSnapshot datum) {
                               Request request = datum.data()! as Request;
+                              String requestId = datum.id;
 
                               return GestureDetector(
                                 onTap: () {
-                                  model.seeRequest(request);
+                                  model.seeRequest(
+                                    request,
+                                    requestId,
+                                  );
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,

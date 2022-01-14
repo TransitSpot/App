@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:transitspot/app/app.locator.dart';
 import 'package:transitspot/datamodels/direction/directions.dart';
 import 'package:transitspot/services/directions_service.dart';
+import 'package:transitspot/services/driver_state_service.dart';
 import 'package:transitspot/services/geolocator_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:transitspot/datamodels/request/request.dart';
@@ -64,13 +65,17 @@ Future<List<Request>> request() async {
   return data;
 }
 
-class RequestListViewModel extends BaseViewModel {
+class RequestListViewModel extends ReactiveViewModel {
   final _geolocatorService = locator<GeolocatorService>();
   final _placesService = locator<PlacesService>();
   final _directionsService = locator<DirectionsService>();
   final _navigationService = locator<NavigationService>();
   final Stream<QuerySnapshot<Request>> _requestStream =
       locator<RequestService>().getStream();
+  final DriverStateService _driverStateService = locator<DriverStateService>();
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_driverStateService];
 
   Stream<QuerySnapshot<Request>> get requestStream => _requestStream;
 
@@ -86,12 +91,11 @@ class RequestListViewModel extends BaseViewModel {
     await _navigationService.navigateTo(page);
   }
 
-  Future seeRequest(Request request) async {
+  Future seeRequest(Request request, String requestId) async {
     await _navigationService.navigateTo(
       Routes.receiveReqView,
-      arguments: ReceiveReqViewArguments(
-        request: request,
-      ),
+      arguments:
+          ReceiveReqViewArguments(request: request, requestId: requestId),
     );
   }
 

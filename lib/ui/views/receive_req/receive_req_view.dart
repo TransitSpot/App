@@ -8,8 +8,11 @@ import 'package:transitspot/datamodels/request/request.dart';
 
 class ReceiveReqView extends StatelessWidget {
   final Request request;
+  final String requestId;
 
-  const ReceiveReqView({Key? key, required this.request}) : super(key: key);
+  const ReceiveReqView(
+      {Key? key, required this.request, required this.requestId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +70,7 @@ class ReceiveReqView extends StatelessWidget {
                               onPressed: () {
                                 // TODO: change to live location
                                 // model.navigatePage(Routes.acceptReqView);
-                                model.acceptRequest(request);
+                                model.acceptRequest(request, requestId);
                               },
                               child: Text(
                                 'See Live Location',

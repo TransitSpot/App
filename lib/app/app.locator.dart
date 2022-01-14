@@ -13,6 +13,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../services/authentication_service.dart';
 import '../services/directions_service.dart';
+import '../services/driver_state_service.dart';
 import '../services/firestore_service.dart';
 import '../services/geolocator_service.dart';
 import '../services/request_service.dart';
@@ -32,6 +33,7 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => PlacesService());
   locator.registerLazySingleton(() => DirectionsService());
   locator.registerLazySingleton(() => RequestService());
+  locator.registerLazySingleton(() => DriverStateService());
   locator.registerSingleton(UserService());
   locator.registerSingleton(GeolocatorService());
 }

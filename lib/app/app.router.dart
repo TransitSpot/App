@@ -156,6 +156,7 @@ class StackedRouter extends RouterBase {
         builder: (context) => ReceiveReqView(
           key: args.key,
           request: args.request,
+          requestId: args.requestId,
         ),
         settings: data,
       );
@@ -175,6 +176,7 @@ class StackedRouter extends RouterBase {
         builder: (context) => AcceptReqView(
           key: args.key,
           request: args.request,
+          requestId: args.requestId,
         ),
         settings: data,
       );
@@ -231,7 +233,9 @@ class OnDemandViewArguments {
 class ReceiveReqViewArguments {
   final Key? key;
   final Request request;
-  ReceiveReqViewArguments({this.key, required this.request});
+  final String requestId;
+  ReceiveReqViewArguments(
+      {this.key, required this.request, required this.requestId});
 }
 
 /// RequestListView arguments holder class
@@ -244,5 +248,7 @@ class RequestListViewArguments {
 class AcceptReqViewArguments {
   final Key? key;
   final Request request;
-  AcceptReqViewArguments({this.key, required this.request});
+  final String requestId;
+  AcceptReqViewArguments(
+      {this.key, required this.request, required this.requestId});
 }

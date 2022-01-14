@@ -7,11 +7,12 @@ import 'package:transitspot/datamodels/request/request.dart';
 class ReceiveReqViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
-  Future acceptRequest(Request request) async {
+  Future acceptRequest(Request request, String requestId) async {
     await _navigationService.navigateTo(
       Routes.acceptReqView,
       arguments: AcceptReqViewArguments(
         request: request,
+        requestId: requestId,
       ),
     );
   }
