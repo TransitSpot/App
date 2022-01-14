@@ -56,96 +56,6 @@ class RequestListView extends StatelessWidget {
                   ),
               },
             ),
-            SlidingUpPanel(
-              panel: Column(
-                children: [
-                  const Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 50.0,
-                  ),
-                  const Divider(),
-                  StreamBuilder<QuerySnapshot>(
-                    stream: model.requestStream,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasError) {
-                        return Text('Something went wrong: ${snapshot.error}');
-                      }
-
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      }
-
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: snapshot.data!.docs.map(
-                            (DocumentSnapshot datum) {
-                              Request request = datum.data()! as Request;
-                              String requestId = datum.id;
-
-                              return GestureDetector(
-                                onTap: () {
-                                  model.seeRequest(
-                                    request,
-                                    requestId,
-                                  );
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text(
-                                        request.customerName,
-                                        textAlign: TextAlign.start,
-                                        style: const TextStyle(
-                                          fontSize: 20.0,
-                                        ),
-                                      ),
-                                    ),
-                                    const Divider(),
-                                  ],
-                                ),
-                              );
-                            },
-                          ).toList(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              collapsed: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.primaryBackground,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(18.0),
-                    topRight: Radius.circular(18.0),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    const Icon(
-                      Icons.keyboard_arrow_up_rounded,
-                      size: 50.0,
-                    ),
-                    Text(
-                      "See Requests",
-                      style: TextStyle(
-                        color: AppColors.content,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(18.0),
-                topRight: Radius.circular(18.0),
-              ),
-            ),
           ],
         ),
         floatingActionButton: Padding(
@@ -163,6 +73,92 @@ class RequestListView extends StatelessWidget {
                 backgroundColor: AppColors.primaryBackground,
               ),
             ),
+          ),
+        ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.all(8),
+          child: MaterialButton(
+            onPressed: () {
+              showModalBottomSheet<void>(
+                context: context,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
+                  ),
+                ),
+                builder: (BuildContext context) {
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    child: ListView(
+                      children: [
+                        const Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          size: 50.0,
+                        ),
+                        const Divider(),
+                        StreamBuilder<QuerySnapshot>(
+                          stream: model.requestStream,
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              return Text(
+                                  'Something went wrong: ${snapshot.error}');
+                            }
+
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            }
+
+                            return SingleChildScrollView(
+                              child: Column(
+                                children: snapshot.data!.docs.map(
+                                  (DocumentSnapshot datum) {
+                                    Request request = datum.data()! as Request;
+                                    String requestId = datum.id;
+
+                                    return GestureDetector(
+                                      onTap: () {
+                                        model.seeRequest(
+                                          request,
+                                          requestId,
+                                        );
+                                      },
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text(
+                                              request.customerName,
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                fontSize: 20.0,
+                                              ),
+                                            ),
+                                          ),
+                                          const Divider(),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ).toList(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            child: const Text("See Request"),
+            color: AppColors.darkSecondaryBackground,
+            textColor: Colors.white,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
