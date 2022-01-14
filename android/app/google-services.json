@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "752631738307",
-    "project_id": "transitspot-65411",
-    "storage_bucket": "transitspot-65411.appspot.com"
+    "project_number": "507047106634",
+    "project_id": "transitspottambahan",
+    "storage_bucket": "transitspottambahan.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:752631738307:android:a38901818a05781580d776",
+        "mobilesdk_app_id": "1:507047106634:android:d6a2f10e962d9afb1e6eb3",
         "android_client_info": {
           "package_name": "com.example.transitspot"
         }
       },
       "oauth_client": [
         {
-          "client_id": "752631738307-i7ik30vbhgucc7552k7j3n3679l6qio0.apps.googleusercontent.com",
+          "client_id": "507047106634-teo2deamsg6s0eccfu9rludmommgu74a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDozS1kf-qmI7ImoVsGTCW5u1D233LWljE"
+          "current_key": "AIzaSyBlzQinK17uZxh_LZs2q7clE3CNbKyA8os"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "752631738307-i7ik30vbhgucc7552k7j3n3679l6qio0.apps.googleusercontent.com",
+              "client_id": "507047106634-teo2deamsg6s0eccfu9rludmommgu74a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

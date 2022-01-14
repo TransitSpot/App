@@ -141,8 +141,8 @@ class RequestListViewModel extends ReactiveViewModel {
   GoogleMapController get googleMapController => _googleMapController;
 
   LatLng _currentLatLng = const LatLng(
-    -6.186477,
-    106.8296487,
+    -6.895,
+    107.602,
   );
   LatLng get currentLatLng => _currentLatLng;
 

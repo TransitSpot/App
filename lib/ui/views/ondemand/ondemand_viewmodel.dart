@@ -157,7 +157,7 @@ class OnDemandViewModel extends FormViewModel {
 
       while (true) {
         await Future.delayed(
-          const Duration(milliseconds: 1000),
+          const Duration(milliseconds: 3000),
           () {
             _timerCountdown = _timerCountdown - 1;
             notifyListeners();

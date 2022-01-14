@@ -170,7 +170,7 @@ class OnDemandView extends StatelessWidget with $OnDemandView {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: const Text('Requesting for driver'),
-        content: Text('Waiting for $time second'),
+        content: Text('Waiting for 30 second'),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'Cancel'),
